@@ -1,0 +1,32 @@
+
+@font-face {
+    font-family: 'Archivo';
+    src:  url('../font/Archivo/Archivo-VariableFont_wdth,wght.ttf') format('truetype');
+}
+body {
+    font-family: 'Archivo', sans-serif;
+    
+}
+
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #003554;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to top, #003554, #003554, #006494);
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to top, #003554, #003554, #006494);
+    }
+    
+    @media (min-width: 768px) {
+    .gradient-form {
+    height: 100vh !important;
+    }
+    }
+    @media (min-width: 769px) {
+    .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+    }
+    }
