@@ -1,25 +1,8 @@
 {
-  "name": "reinaldorti/wdev-mvc",
-  "description": "MVC em PHP: Conceito e início do projeto - Série MVC em PHP",
-  "minimum-stability": "stable",
-  "authors": [
-    {
-      "name": "Reinaldo Dorti",
-      "email": "reinaldorti@gmail.com",
-      "role": "Developer"
+    "name": "nexussync/nexusrh",
+    "autoload": {
+        "psr-4": {
+            "App\\":"app/"
+        }
     }
-  ],
-  "config": {
-    "vendor-dir": "vendor"
-  },
-  "autoload": {
-    "psr-4": {
-      "App\\": "app/"
-    }
-  },
-  "require": {
-    "ext-json": "*",
-    "php": "^7.3||^8.0",
-    "ext-pdo": "^7.3||^8.0"
-  }
 }

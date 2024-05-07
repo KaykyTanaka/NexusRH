@@ -1,19 +1,19 @@
 <?php return array(
     'root' => array(
-        'name' => 'reinaldorti/wdev-mvc',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'name' => 'nexussync/nexusrh',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => 'e7af922ab9a087d12cd24c4559d7ca4def9a3e81',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
-        'reinaldorti/wdev-mvc' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+        'nexussync/nexusrh' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => 'e7af922ab9a087d12cd24c4559d7ca4def9a3e81',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
