@@ -1,3 +1,18 @@
+<?php
+    namespace App\View;
+    require dirname(__DIR__,2) . '/vendor/autoload.php';
+    use \App\Controller\LoginController;
+    $banco = new LoginController;
+    //var_dump($banco->getUsuario());
+    //var_dump($banco->chamarTipo());
+    if(!isset($_SESSION['usuario'])){
+        
+    }
+    if(isset($_POST['sair'])){
+        $banco->destroy_sessoes();
+        header('Location: LoginView.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,9 +49,12 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" 
+            <?php if($banco->chamarTipo() == "colaborador") : ?>href="IndexColaborador.php"
+            <?php elseif($banco->chamarTipo() == "administrador") : ?>href="IndexAdministrador.php"
+            <?php endif; ?> >
                 <div class="sidebar-brand-icon">
-                    <img src="../img/logo.svg" style="width: 45px;" alt="logo">
+                    <img src="img/logo.svg" style="width: 45px;" alt="logo">
                 </div>
                 <div class="sidebar-brand-text mx-3">NexusSync</div>
             </a>
@@ -45,12 +63,15 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link"  
+                <?php if($banco->chamarTipo() == "colaborador") : ?>href="IndexColaborador.php"
+                <?php elseif($banco->chamarTipo() == "administrador") : ?> href="IndexAdministrador.php"
+                <?php endif; ?>>
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="treinamentos.php">
+                <a class="nav-link" href="viewTreinamentos.php">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Treinamentos</span></a>
             </li>
@@ -60,7 +81,7 @@
                     <span>Tables</span></a>
             </li>
 
-
+     
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
@@ -192,7 +213,8 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="...">
+                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                            alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
@@ -203,7 +225,8 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg" alt="...">
+                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                            alt="...">
                                         <div class="status-indicator"></div>
                                     </div>
                                     <div>
@@ -214,7 +237,8 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg" alt="...">
+                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                            alt="...">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
                                     <div>
@@ -246,7 +270,8 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle"
+                                    src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

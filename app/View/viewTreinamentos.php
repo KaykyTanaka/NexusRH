@@ -75,9 +75,12 @@ if (isset($_POST['editarTreinamento'])) {
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" 
+            <?php if($banco->chamarTipo() == "colaborador") : ?>href="IndexColaborador.php"
+            <?php elseif($banco->chamarTipo() == "administrador") : ?>href="IndexAdministrador.php"
+            <?php endif; ?> >
                 <div class="sidebar-brand-icon">
-                    <img src="../img/logo.svg" style="width: 45px;" alt="logo">
+                    <img src="img/logo.svg" style="width: 45px;" alt="logo">
                 </div>
                 <div class="sidebar-brand-text mx-3">NexusSync</div>
             </a>
@@ -86,7 +89,10 @@ if (isset($_POST['editarTreinamento'])) {
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="indexAdministrador.php">
+                <a class="nav-link"
+                <?php if($banco->chamarTipo() == "colaborador") : ?>href="IndexColaborador.php"
+                <?php elseif($banco->chamarTipo() == "administrador") : ?>href="IndexAdministrador.php"
+                <?php endif; ?> >
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
