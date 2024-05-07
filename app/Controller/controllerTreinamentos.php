@@ -25,7 +25,8 @@ class controllerTreinamentos
 
     public function getAllTreinamentos()
     {
-        $stmt = $this->db->query('SELECT * FROM tre_treinamento WHERE tre_ativo = true;');
+        $teste = self::BDConnection();
+        $stmt = $teste->query('SELECT * FROM tre_treinamento WHERE tre_ativo = true;');
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
