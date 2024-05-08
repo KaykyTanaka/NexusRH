@@ -26,6 +26,7 @@ if (isset($_POST['enviar'])) {
     $treResponsavel = $_POST['treResponsavel'];
 
     $varErro = $novoTreinamento->inserirTreinamento($treTitulo, $treDescricao, $treResponsavel);
+    header('Location:' .basename(__FILE__));
 }
 
 $editTreinamento = new controllerTreinamentos;
@@ -36,6 +37,16 @@ if (isset($_POST['editarTreinamento'])) {
     $treResponsavel = $_POST['editTreResponsavel'];
 
     $varErro = $editTreinamento->editarTreinamento($treId, $treTitulo, $treDescricao, $treResponsavel);
+    header('Location:' .basename(__FILE__));
+}
+
+$desativarTreinamento = new controllerTreinamentos;
+if (isset($_POST['desativarTreinamento'])) {
+    $treId = $_POST['desTreinamento'];
+
+    $varErro = $desativarTreinamento->disableTreinamento($treId);
+    
+    //header('Location:' .basename(__FILE__));
 }
 
 ?>
@@ -63,6 +74,7 @@ if (isset($_POST['editarTreinamento'])) {
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <script src="vendor/sweetalert2/dist/sweetalert2.min.js"></script>
 
 </head>
 
@@ -397,7 +409,8 @@ if (isset($_POST['editarTreinamento'])) {
                                     <tbody>
                                         <?php foreach ($treinamentos as $treinamento): ?>
                                             <tr>
-                                                <td><?php echo $treinamento['tre_id']; ?></td>
+                                            
+                                            <td><?php echo $treinamento['tre_id']; ?></td>
                                                 <td><?php echo $treinamento['tre_titulo']; ?></td>
                                                 <td><?php echo $treinamento['tre_descricao']; ?></td>
                                                 <td><?php echo $treinamento['tre_responsavel']; ?></td>
@@ -415,8 +428,9 @@ if (isset($_POST['editarTreinamento'])) {
                                                                 </button>
                                                             </div>
                                                             <div class="col-6">
-                                                                <button class="btn btn-danger btn-desativar mr-2"
-                                                                    data-id="<?php echo $treinamento['tre_id']; ?>">
+                                                                <button type="submit" class="btn btn-danger btn-desativar mr-2"
+                                                                data-toggle="modal" data-target="#desativarTreinamento" 
+                                                                data-id="<?php echo $treinamento['tre_id']; ?>" name="desativar">
                                                                     <i class="fas fa-ban"></i>
                                                                 </button>
                                                             </div>
@@ -424,7 +438,9 @@ if (isset($_POST['editarTreinamento'])) {
                                                     </div>
                                                 </td>
                                             </tr>
-                                        <?php endforeach; ?>
+                                            
+                                            <?php endforeach; ?>
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -494,6 +510,34 @@ if (isset($_POST['editarTreinamento'])) {
         </div>
     </div>
 
+
+    <div class="modal" id="desativarTreinamento" tabindex="-1" role="dialog" aria-labelledby="desativarTreinamentoLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="desativarTreinamentoLabel">Editar Treinamento</h5>
+                    
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="formdesativarTreinamento" method="POST">
+                    <div class="form-group">
+                        <!-- <label for="desTreinamento">ID:</label> -->
+                        <input type="hidden" class="form-control" id="desTreinamento" name="desTreinamento" required>
+                    </div>
+                    <div class="modal-body">
+
+                    <p>Desativar treinamento?</p>
+                    <button type="submit" class="btn btn-primary" name="desativarTreinamento">Sim</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -527,6 +571,7 @@ if (isset($_POST['editarTreinamento'])) {
     <!-- Page level plugins -->
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <link href="vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 
     <script src="https://cdn.datatables.net/plug-ins/1.11.5/sorting/natural.js"></script>
     <!-- Page level custom scripts -->
@@ -546,6 +591,13 @@ if (isset($_POST['editarTreinamento'])) {
                 $('#editTreTitulo').val(treTitulo);
                 $('#editTreDescricao').val(treDescricao);
                 $('#editTreResponsavel').val(treResponsavel);
+            });
+            $('.btn-desativar').click(function () {
+                // Recupera o ID do treinamento do botão clicado
+                var treId = $(this).data('id');
+
+                $('#desTreinamento').val(treId);
+               
             });
         });
     </script>
