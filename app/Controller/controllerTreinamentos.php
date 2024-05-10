@@ -34,6 +34,7 @@ class controllerTreinamentos
     {
         $stmt = $this->db->prepare('UPDATE tre_treinamento SET tre_ativo = false WHERE tre_id = :id');
         $stmt->bindParam(':id', $treinamentoId);
+        echo "teste";
         return $stmt->execute();
     }
 

@@ -11,7 +11,7 @@
         }
         public function BDLogin($email, $senha, $login){
             $banco = self::BDConnection();
-            $chamada = $banco->query("SELECT adm_email, adm_senha FROM adm_administradorRH;");
+            $chamada = $banco->query("SELECT usu_email, usu_senha FROM usu_usuarios;");
             $modelLogin = self::VerificarLogin($chamada, $email, $senha, $login);
             $LModel = new LoginModel;
             if($modelLogin == true){
@@ -43,7 +43,7 @@
                 while($linha = $chamada->fetch(PDO::FETCH_ASSOC)) {
                     //echo $email . " " . $senha;
                     //echo "<br>Email: {$linha['adm_email']} - Senha: {$linha['adm_senha']} <br />";
-                    if($email == $linha['adm_email'] && $senha == $linha['adm_senha']){
+                    if($email == $linha['usu_email'] && $senha == $linha['usu_senha']){
                         return true;
                     }else{
                         //return false;
@@ -53,12 +53,16 @@
         }
         public function VerificarTipo($email){
             $banco = self::BDConnection();
-            $chamada = $banco->query("SELECT adm_email, adm_tipo FROM adm_administradorRH WHERE '$email' = adm_email;");
+            //$chamada = $banco->query("SELECT adm_email, adm_tipo FROM adm_administradorRH WHERE '$email' = adm_email;");
+            $chamada = $banco->
+            query("SELECT usu_email, 'administrador' as tipo from usu_usuarios u inner join adm_administradorRH a on u.usu_id = a.usu_id where '$email' = usu_email
+            union
+            select usu_email, 'colaborador' as tipo from usu_usuarios u inner join col_colaborador c on u.usu_id = c.usu_id where '$email' = usu_email;");
             $linha = $chamada->fetchAll(PDO::FETCH_ASSOC);
             $linhaLength = count($linha);
             for($i=0;$i<= $linhaLength;$i++){
-                if($email == $linha[$i]['adm_email']){
-                    return $linha[$i]['adm_tipo'];
+                if($email == $linha[$i]['usu_email']){
+                    return $linha[$i]['tipo'];
                 }
             }
         }
