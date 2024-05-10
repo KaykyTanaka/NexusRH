@@ -41,12 +41,12 @@ if (isset($_POST['editarTreinamento'])) {
 }
 
 $desativarTreinamento = new controllerTreinamentos;
-if (isset($_POST['desativarTreinamento'])) {
+if (isset($_POST['desTreinamento'])) {
     $treId = $_POST['desTreinamento'];
-
     $varErro = $desativarTreinamento->disableTreinamento($treId);
-    
-    //header('Location:' .basename(__FILE__));
+    //echo "teste";
+
+    header('Location:' .basename(__FILE__));
 }
 
 ?>
@@ -87,10 +87,9 @@ if (isset($_POST['desativarTreinamento'])) {
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" 
-            <?php if($banco->chamarTipo() == "colaborador") : ?>href="IndexColaborador.php"
-            <?php elseif($banco->chamarTipo() == "administrador") : ?>href="IndexAdministrador.php"
-            <?php endif; ?> >
+            <a class="sidebar-brand d-flex align-items-center justify-content-center"
+                <?php if($banco->chamarTipo() == "colaborador") : ?>href="IndexColaborador.php"
+                <?php elseif($banco->chamarTipo() == "administrador") : ?>href="IndexAdministrador.php" <?php endif; ?>>
                 <div class="sidebar-brand-icon">
                     <img src="img/logo.svg" style="width: 45px;" alt="logo">
                 </div>
@@ -101,10 +100,9 @@ if (isset($_POST['desativarTreinamento'])) {
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link"
-                <?php if($banco->chamarTipo() == "colaborador") : ?>href="IndexColaborador.php"
-                <?php elseif($banco->chamarTipo() == "administrador") : ?>href="IndexAdministrador.php"
-                <?php endif; ?> >
+                <a class="nav-link" <?php if($banco->chamarTipo() == "colaborador") : ?>href="IndexColaborador.php"
+                    <?php elseif($banco->chamarTipo() == "administrador") : ?>href="IndexAdministrador.php"
+                    <?php endif; ?>>
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -408,39 +406,41 @@ if (isset($_POST['desativarTreinamento'])) {
                                     </thead>
                                     <tbody>
                                         <?php foreach ($treinamentos as $treinamento): ?>
-                                            <tr>
-                                            
+                                        <tr>
+
                                             <td><?php echo $treinamento['tre_id']; ?></td>
-                                                <td><?php echo $treinamento['tre_titulo']; ?></td>
-                                                <td><?php echo $treinamento['tre_descricao']; ?></td>
-                                                <td><?php echo $treinamento['tre_responsavel']; ?></td>
-                                                <td>
-                                                    <div class="container text-center">
-                                                        <div class="row">
-                                                            <div class="col-6">
-                                                                <button class="btn btn-primary btn-editar"
-                                                                    data-toggle="modal" data-target="#editarTreinamento"
-                                                                    data-id="<?php echo $treinamento['tre_id']; ?>"
-                                                                    data-titulo="<?php echo $treinamento['tre_titulo']; ?>"
-                                                                    data-descricao="<?php echo $treinamento['tre_descricao']; ?>"
-                                                                    data-responsavel="<?php echo $treinamento['tre_responsavel']; ?>">
-                                                                    <i class="fas fa-edit"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <button type="submit" class="btn btn-danger btn-desativar mr-2"
-                                                                data-toggle="modal" data-target="#desativarTreinamento" 
-                                                                data-id="<?php echo $treinamento['tre_id']; ?>" name="desativar">
-                                                                    <i class="fas fa-ban"></i>
-                                                                </button>
-                                                            </div>
+                                            <td><?php echo $treinamento['tre_titulo']; ?></td>
+                                            <td><?php echo $treinamento['tre_descricao']; ?></td>
+                                            <td><?php echo $treinamento['tre_responsavel']; ?></td>
+                                            <td>
+                                                <div class="container text-center">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <button class="btn btn-primary btn-editar"
+                                                                data-toggle="modal" data-target="#editarTreinamento"
+                                                                data-id="<?php echo $treinamento['tre_id']; ?>"
+                                                                data-titulo="<?php echo $treinamento['tre_titulo']; ?>"
+                                                                data-descricao="<?php echo $treinamento['tre_descricao']; ?>"
+                                                                data-responsavel="<?php echo $treinamento['tre_responsavel']; ?>">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <button type="submit"
+                                                                class="btn btn-danger btn-desativar mr-2"
+                                                                data-toggle="modal" data-target="#desativarTreinamento"
+                                                                data-id="<?php echo $treinamento['tre_id']; ?>"
+                                                                name="desativar">
+                                                                <i class="fas fa-ban"></i>
+                                                            </button>
                                                         </div>
                                                     </div>
-                                                </td>
-                                            </tr>
-                                            
-                                            <?php endforeach; ?>
-                                        
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        <?php endforeach; ?>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -511,31 +511,11 @@ if (isset($_POST['desativarTreinamento'])) {
     </div>
 
 
-    <div class="modal" id="desativarTreinamento" tabindex="-1" role="dialog" aria-labelledby="desativarTreinamentoLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="desativarTreinamentoLabel">Editar Treinamento</h5>
-                    
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form id="formdesativarTreinamento" method="POST">
-                    <div class="form-group">
-                        <!-- <label for="desTreinamento">ID:</label> -->
-                        <input type="hidden" class="form-control" id="desTreinamento" name="desTreinamento" required>
-                    </div>
-                    <div class="modal-body">
-
-                    <p>Desativar treinamento?</p>
-                    <button type="submit" class="btn btn-primary" name="desativarTreinamento">Sim</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
-                </form>
-                </div>
-            </div>
-        </div>
+    <div class="modal" name="desativarTreinamento" id="desativarTreinamento" tabindex="-1" role="dialog"
+        aria-labelledby="desativarTreinamentoLabel" aria-hidden="true">
+        <form name="formdesativarTreinamento" id="formdesativarTreinamento" method="POST">
+            <input type="hidden" class="form-control" id="desTreinamento" name="desTreinamento" required>
+        </form>
     </div>
 
     <!-- Logout Modal-->
@@ -577,29 +557,52 @@ if (isset($_POST['desativarTreinamento'])) {
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
     <script>
-        $(document).ready(function () {
-            // Evento de clique no botão de edição
-            $('.btn-editar').click(function () {
-                // Recupera o ID do treinamento do botão clicado
-                var treId = $(this).data('id');
-                var treTitulo = $(this).data('titulo');
-                var treDescricao = $(this).data('descricao');
-                var treResponsavel = $(this).data('responsavel');
+    $(document).ready(function() {
+        // Evento de clique no botão de edição
+        $('.btn-editar').click(function() {
+            // Recupera o ID do treinamento do botão clicado
+            var treId = $(this).data('id');
+            var treTitulo = $(this).data('titulo');
+            var treDescricao = $(this).data('descricao');
+            var treResponsavel = $(this).data('responsavel');
 
-                // Define os valores nos campos do formulário de edição
-                $('#editTreinamentoId').val(treId);
-                $('#editTreTitulo').val(treTitulo);
-                $('#editTreDescricao').val(treDescricao);
-                $('#editTreResponsavel').val(treResponsavel);
-            });
-            $('.btn-desativar').click(function () {
-                // Recupera o ID do treinamento do botão clicado
-                var treId = $(this).data('id');
-
-                $('#desTreinamento').val(treId);
-               
-            });
+            // Define os valores nos campos do formulário de edição
+            $('#editTreinamentoId').val(treId);
+            $('#editTreTitulo').val(treTitulo);
+            $('#editTreDescricao').val(treDescricao);
+            $('#editTreResponsavel').val(treResponsavel);
         });
+        $('.btn-desativar').click(function() {
+            // Recupera o ID do treinamento do botão clicado
+            var treId = $(this).data('id');
+
+            $('#desTreinamento').val(treId);
+            Swal.fire({
+                title: "Tem certeza?",
+                text: "Você não conseguira reverter isto!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Deletar"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Deletado!",
+                        text: "O usuário foi deletado com sucesso, redirecionando em 2 segundos.",
+                        icon: "success",
+                        timer: 2000
+                        //showConfirmButton: false
+                    }).then(function() {
+                        document.getElementById("desTreinamento").value = treId;
+                        document.forms["formdesativarTreinamento"].submit();
+                    });
+                    //document.formdesativarTreinamento.desTreinamento.value = treId;
+                }
+            });
+
+        });
+    });
     </script>
 
 

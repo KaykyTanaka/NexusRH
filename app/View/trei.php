@@ -12,10 +12,10 @@
     <title>Treinamentos</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
@@ -174,8 +174,7 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                            alt="...">
+                                        <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
@@ -186,8 +185,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
-                                            alt="...">
+                                        <img class="rounded-circle" src="img/undraw_profile_2.svg" alt="...">
                                         <div class="status-indicator"></div>
                                     </div>
                                     <div>
@@ -198,8 +196,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
-                                            alt="...">
+                                        <img class="rounded-circle" src="img/undraw_profile_3.svg" alt="...">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
                                     <div>
@@ -231,8 +228,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -270,10 +266,10 @@
                         <h1 class="h3 mb-0 text-gray-800">Treinamentos</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-plus fa-sm text-white-50"></i>Treinamento</a>
-                              
+
                     </div>
 
-                 
+
 
                     <div class="row">
 
@@ -286,26 +282,24 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Cursos</h6>
                                 </div>
                                 <div class="card-body">
-                                    <h4 class="small font-weight-bold">JavaScript<span
-                                            class="float-right">30%</span></h4>
+                                    <h4 class="small font-weight-bold">JavaScript<span class="float-right">30%</span>
+                                    </h4>
                                     <div class="progress mb-4">
                                         <div class="progress-bar bg-primary" role="progressbar" style="width: 30%"
                                             aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                    <h4 class="small font-weight-bold">React <span
-                                            class="float-right">0%</span></h4>
+                                    <h4 class="small font-weight-bold">React <span class="float-right">0%</span></h4>
                                     <div class="progress mb-4">
                                         <div class="progress-bar bg-warning" role="progressbar" style="width: 0%"
                                             aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                    <h4 class="small font-weight-bold">PHP <span
-                                            class="float-right">70%</span></h4>
+                                    <h4 class="small font-weight-bold">PHP <span class="float-right">70%</span></h4>
                                     <div class="progress mb-4">
                                         <div class="progress-bar" role="progressbar" style="width: 70%"
                                             aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                    <h4 class="small font-weight-bold"> HTML / CSS <span
-                                            class="float-right">100%</span></h4>
+                                    <h4 class="small font-weight-bold"> HTML / CSS <span class="float-right">100%</span>
+                                    </h4>
                                     <div class="progress mb-4">
                                         <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
                                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
@@ -323,13 +317,15 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Notificações</h6>
                                 </div>
                                 <div class="card-body">
-                            
-                                    <p>Curso de HTML/CSS Completo <br>Kayky Tanaka / Departamento Desenvolvimento </p> <br>
-                                    <p>Certificado de Mercado Submetido <br> Rafael Augusto / Departamento Marketing </p>
+
+                                    <p>Curso de HTML/CSS Completo <br>Kayky Tanaka / Departamento Desenvolvimento </p>
+                                    <br>
+                                    <p>Certificado de Mercado Submetido <br> Rafael Augusto / Departamento Marketing
+                                    </p>
                                 </div>
                             </div>
-</div>
-                            <div class="col-lg-12 mb-4">    
+                        </div>
+                        <div class="col-lg-12 mb-4">
                             <!-- Approach -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
