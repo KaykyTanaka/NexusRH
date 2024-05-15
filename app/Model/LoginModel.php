@@ -1,9 +1,8 @@
 <?php
     namespace App\Model;
     session_start();
-    //use NexusRH\Controller\LoginController;
     class LoginModel{   
-        public $erro = 'Perfil não encontrado!';
+        private $erro = 'Perfil não encontrado!';
         private $email;
         private $senha;
 
@@ -34,7 +33,12 @@
         static function setUsuario($email, $senha){
             $_SESSION['email'] = $email;
             $_SESSION['senha'] = $senha;
-            //echo $_SESSION['email'] . " " . $_SESSION['senha'];
+        }
+        static function getID(){
+            return $_SESSION['id'];
+        }
+        static function setID($id){
+            $_SESSION['id'] = $id;
         }
         static function getUsuario(){
             return [$_SESSION['email'], $_SESSION['senha']];
