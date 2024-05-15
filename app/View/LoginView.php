@@ -8,17 +8,7 @@
         $senha = $_POST['senha'];
         $login = $_POST['login'];
         $varErro = $banco->BDLogin($email, $senha, $login);
-        // $banco->setErro($_SESSION['login']);
-        // //echo $_SESSION['login'];
-        // echo $banco->getErro();
     }
-    // if(!isset($email)){
-    //     $email = '';
-    //     $senha = '';
-    //     $login = '';
-    // }
-    // $banco->setErro();
-    // echo $banco->getErro();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
