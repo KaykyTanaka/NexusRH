@@ -1,10 +1,11 @@
 <?php
 namespace App\Controller;
 
+use \App\Model\TreinamentosModel;
 use \PDO;
 use \PDOException;
 
-class controllerTreinamentos
+class TreinamentosController extends TreinamentosModel
 {
     private $db;
 

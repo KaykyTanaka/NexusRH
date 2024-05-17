@@ -1,7 +1,7 @@
 <?php
 namespace App\Model;
 
-class modelTreinamentos
+class TreinamentosModel
 {
     private $tre_id;
     private $tre_titulo;
