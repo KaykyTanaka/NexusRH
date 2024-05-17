@@ -6,15 +6,17 @@ use \App\Controller\LoginController;
 
 $banco = new LoginController;
 //var_dump($banco->getUsuario());
+//var_dump($banco->getUsuario()[0]);
 //var_dump($banco->chamarTipo());
 if (!isset($_SESSION['usuario'])) {
-    header('Location: viewTreinamentos.php'); //Alterar!!
+    //Alterar!!
 }
 if (isset($_POST['sair'])) {
     $banco->destroy_sessoes();
     header('Location: LoginView.php');
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,36 +55,31 @@ if (isset($_POST['sair'])) {
                     </div>
                     <div class="sidebar-brand-text mx-3">NexusSync</div>
                 </a>
-                <p style="padding-top:10%; padding-left:6%; color: white;"> Perfil: Administrador do RH
+                <p style="padding-top:10%; padding-left:6%; color: white;"> Perfil: Colaborador
                     <!-- <br> Conta: </?php echo $banco->getUsuario()[0] ?> -->
                 </p>
+
                 <!-- Divider -->
-                <hr class="sidebar-divider my-0 ">
+                <hr class="sidebar-divider my-0">
 
                 <!-- Nav Item - Dashboard -->
-                <!--                 <li class="nav-item active">
+                <li class="nav-item active">
                     <a class="nav-link" href="index.php">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
-                </li> -->
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="viewTreinamentos.php">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Treinamentos</span></a>
                 </li>
 
-                <li class="nav-item active">
-                    <a class="nav-link" href="ColaboradoresView.php">
-                        <i class="fas fa-fw fa-users"></i>
-                        <span>Colaboradores</span></a>
-                </li>
 
-
-                <!--                 <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" href="usuarios.php">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Tables</span></a>
-                </li> -->
+                </li>
                 <li class="nav-item">
                     <input type="submit" class="nav-link text-center" name="sair" value="Sair">
                 </li>
@@ -161,11 +158,9 @@ if (isset($_POST['sair'])) {
 
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Treinamentos</h1>
-                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                    class="fas fa-plus fa-sm text-white-50"></i>Treinamento</a>
-
+                            <h1 class="h3 mb-0 text-gray-800">?</h1>
                         </div>
+
 
                     </div>
                     <!-- /.container-fluid -->
@@ -214,6 +209,7 @@ if (isset($_POST['sair'])) {
             </div>
         </div>
     </form>
+
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

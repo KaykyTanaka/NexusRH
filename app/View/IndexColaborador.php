@@ -9,7 +9,7 @@ $banco = new LoginController;
 //var_dump($banco->getUsuario()[0]);
 //var_dump($banco->chamarTipo());
 if (!isset($_SESSION['usuario'])) {
-    //Alterar!!
+    header('Location: PerfilView.php'); //Alterar!!
 }
 if (isset($_POST['sair'])) {
     $banco->destroy_sessoes();
@@ -63,11 +63,12 @@ if (isset($_POST['sair'])) {
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.php">
+                    <a class="nav-link" href="PerfilView.php">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span></a>
+                        <span>Perfil</span>
+                    </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="viewTreinamentos.php">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Treinamentos</span></a>
@@ -78,7 +79,7 @@ if (isset($_POST['sair'])) {
                     <a class="nav-link" href="usuarios.php">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Tables</span></a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <input type="submit" class="nav-link text-center" name="sair" value="Sair">
                 </li>

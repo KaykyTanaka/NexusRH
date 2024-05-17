@@ -1,14 +1,16 @@
 <?php
-    namespace App\View;
-    require dirname(__DIR__,2) . '/vendor/autoload.php';
-    use \App\Controller\LoginController;
-    $banco = new LoginController;
-    if(isset($_POST['login'])){
-        $email = $_POST['email'];
-        $senha = $_POST['senha'];
-        $login = $_POST['login'];
-        $varErro = $banco->BDLogin($email, $senha, $login);
-    }
+namespace App\View;
+
+require dirname(__DIR__, 2) . '/vendor/autoload.php';
+use \App\Controller\LoginController;
+
+$banco = new LoginController;
+if (isset($_POST['login'])) {
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
+    $login = $_POST['login'];
+    $varErro = $banco->BDLogin($email, $senha, $login);
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -50,24 +52,26 @@
                                             <p>Faça login com sua conta</p>
 
                                             <div data-mdb-input-init class="form-outline mb-4">
-                                                <input type="text" name="email" 
-                                                id="email" class="form-control" placeholder="E-mail" />
+                                                <input type="text" name="email" id="email" class="form-control"
+                                                    placeholder="E-mail" />
                                             </div>
 
                                             <div data-mdb-input-init class="form-outline mb-4">
-                                                <input type="password" name="senha" 
-                                                id="senha" class="form-control" placeholder="Senha" />
-                                        
+                                                <input type="password" name="senha" id="senha" class="form-control"
+                                                    placeholder="Senha" />
+
                                             </div>
 
                                             <div class="text-center pt-1 mb-5 pb-1">
                                                 <input data-mdb-button-init data-mdb-ripple-init
-                                                class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
-                                                type="submit" name="login" value="Login">
+                                                    class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
+                                                    type="submit" name="login" value="Login">
                                                 <br>
-                                                <p> <?php  if(isset($varErro)){echo $varErro;} ?>
+                                                <p> <?php if (isset($varErro)) {
+                                                    echo $varErro;
+                                                } ?>
                                                 <p>
-                                                <a class="text-muted" href="#!">Esqueceu a senha?</a>
+                                                    <a class="text-muted" href="#!">Esqueceu a senha?</a>
                                             </div>
 
                                         </form>
@@ -77,8 +81,10 @@
                                 <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
                                     <div class="text-white px-3 py-4 p-md-5 mx-md-4">
                                         <h4 class="mb-4">MISSÃO: </h4>
-                                        <p class="small mb-0">Nossa missão é oferecer soluções de software de alta qualidade
-                                            e alto desempenho, que simplifiquem e otimizem processos de gestão, promovendo a
+                                        <p class="small mb-0">Nossa missão é oferecer soluções de software de alta
+                                            qualidade
+                                            e alto desempenho, que simplifiquem e otimizem processos de gestão,
+                                            promovendo a
                                             eficiência operacional, a transparência e a satisfação dos clientes.</p>
                                     </div>
                                 </div>

@@ -111,7 +111,7 @@ if (isset($_POST['desTreinamento'])) {
                 <i class="fas fa-fw fa-users"></i>
                     <span>Colaboradores</span></a>
             </li>
-
+            
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
@@ -419,57 +419,6 @@ if (isset($_POST['desTreinamento'])) {
     <script src="vendor/datatables/natural.js"></script>
     <script src="js/demo/datatables-demo.js"></script>
     
-    
-    <script>
-    $(document).ready(function() {
-        // Evento de clique no botão de edição
-        $('.btn-editar').click(function() {
-            // Recupera o ID do treinamento do botão clicado
-            var treId = $(this).data('id');
-            var treTitulo = $(this).data('titulo');
-            var treDescricao = $(this).data('descricao');
-            var treResponsavel = $(this).data('responsavel');
-
-            // Define os valores nos campos do formulário de edição
-            $('#editTreinamentoId').val(treId);
-            $('#editTreTitulo').val(treTitulo);
-            $('#editTreDescricao').val(treDescricao);
-            $('#editTreResponsavel').val(treResponsavel);
-        });
-        $('.btn-desativar').click(function() {
-            // Recupera o ID do treinamento do botão clicado
-            var treId = $(this).data('id');
-
-            $('#desTreinamento').val(treId);
-            Swal.fire({
-                title: "Tem certeza?",
-                text: "Você não conseguira reverter isto!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Deletar"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire({
-                        title: "Deletado!",
-                        text: "O usuário foi deletado com sucesso, redirecionando em 2 segundos.",
-                        icon: "success",
-                        timer: 2000
-                        //showConfirmButton: false
-                    }).then(function() {
-                        document.getElementById("desTreinamento").value = treId;
-                        document.forms["formdesativarTreinamento"].submit();
-                    });
-                    //document.formdesativarTreinamento.desTreinamento.value = treId;
-                }
-            });
-
-        });
-    });
-    </script>
-
-
 </body>
 
 </html>
