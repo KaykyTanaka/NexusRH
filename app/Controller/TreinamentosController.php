@@ -42,7 +42,8 @@ class TreinamentosController extends TreinamentosModel
     public function inserirTreinamento($treTitulo, $treDescricao, $treResponsavel)
     {
         try {
-            $sql = "INSERT INTO tre_treinamento (tre_titulo, tre_descricao, tre_responsavel, tre_ativo) VALUES (:titulo, :descricao, :responsavel, true)";
+            $sql = "INSERT INTO tre_treinamento (tre_titulo, tre_descricao, tre_responsavel, tre_ativo) 
+            VALUES (:titulo, :descricao, :responsavel, true)";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':titulo', $treTitulo);
             $stmt->bindParam(':descricao', $treDescricao);
@@ -59,7 +60,8 @@ class TreinamentosController extends TreinamentosModel
     public function editarTreinamento($treId, $treTitulo, $treDescricao, $treResponsavel)
     {
         try {
-            $sql = "UPDATE tre_treinamento SET tre_titulo = :titulo, tre_descricao = :descricao, tre_responsavel = :responsavel WHERE tre_id = :id";
+            $sql = "UPDATE tre_treinamento SET tre_titulo = :titulo, tre_descricao = :descricao, tre_responsavel = :responsavel 
+            WHERE tre_id = :id";
 
             $stmt = $this->db->prepare($sql);
 

@@ -305,12 +305,14 @@ $(document).ready(function() {
         // Recupera o ID do treinamento do botão clicado
         var treId = $(this).data('id');
         var treTitulo = $(this).data('titulo');
+        //var <?php echo 'z'?> = $(this).data('titulo');
         var treDescricao = $(this).data('descricao');
         var treResponsavel = $(this).data('responsavel');
 
         // Define os valores nos campos do formulário de edição
         $('#editTreinamentoId').val(treId);
         $('#editTreTitulo').val(treTitulo);
+        //$('#editTreTitulo').val(z);
         $('#editTreDescricao').val(treDescricao);
         $('#editTreResponsavel').val(treResponsavel);
     });
