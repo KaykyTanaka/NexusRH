@@ -3,13 +3,14 @@ namespace App\View;
 
 require dirname(__DIR__, 2) . '/vendor/autoload.php';
 use \App\Controller\LoginController;
+use \App\Controller\Renders;
 
 $banco = new LoginController;
 //var_dump($banco->getUsuario());
 //var_dump($banco->getUsuario()[0]);
 //var_dump($banco->chamarTipo());
 if (!isset($_SESSION['usuario'])) {
-    header('Location: PerfilView.php'); //Alterar!!
+    //header('Location: PerfilView.php'); //Alterar!!
 }
 if (isset($_POST['sair'])) {
     $banco->destroy_sessoes();
@@ -45,49 +46,7 @@ if (isset($_POST['sair'])) {
         <div id="wrapper">
 
             <!-- Sidebar -->
-            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-                <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-                    <div class="sidebar-brand-icon">
-                        <img src="img/logo.svg" style="width: 45px;" alt="logo">
-                    </div>
-                    <div class="sidebar-brand-text mx-3">NexusSync</div>
-                </a>
-                <p style="padding-top:10%; padding-left:6%; color: white;"> Perfil: Colaborador
-                    <!-- <br> Conta: </?php echo $banco->getUsuario()[0] ?> -->
-                </p>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider my-0">
-
-                <!-- Nav Item - Dashboard -->
-                <li class="nav-item active">
-                    <a class="nav-link" href="PerfilView.php">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Perfil</span>
-                    </a>
-                </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link" href="viewTreinamentos.php">
-                        <i class="fas fa-fw fa-folder"></i>
-                        <span>Treinamentos</span></a>
-                </li>
-
-
-                <li class="nav-item">
-                    <a class="nav-link" href="usuarios.php">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Tables</span></a>
-                </li> -->
-                <li class="nav-item">
-                    <input type="submit" class="nav-link text-center" name="sair" value="Sair">
-                </li>
-                <div class="text-center d-none d-md-inline">
-                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                </div>
-
-            </ul>
+            <?php Renders::renderSidebar($banco->chamarTipo()); ?>
             <!-- End of Sidebar -->
 
             <!-- Content Wrapper -->
@@ -189,26 +148,9 @@ if (isset($_POST['sair'])) {
             <i class="fas fa-angle-up"></i>
         </a>
 
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
+    <!-- Logout Modal-->
+    <?php Renders::logoutModal(); ?>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
