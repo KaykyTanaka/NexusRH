@@ -2,7 +2,7 @@
 namespace App\View;
 
 require dirname(__DIR__, 2) . '/vendor/autoload.php';
-use \App\Controller\TreinamentosController;
+use \App\Controller\ColaboradoresController;
 use \App\Controller\LoginController;
 use \App\Controller\Renders;
 
@@ -12,39 +12,7 @@ if (isset($_POST['sair'])) {
     header('Location: LoginView.php');
 }
 
-$TreinamentosController = new TreinamentosController;
-$treinamentos = $TreinamentosController->getAllTreinamentos();
-
-$novoTreinamento = new TreinamentosController;
-if (isset($_POST['enviar'])) {
-    $treTitulo = $_POST['treTitulo'];
-    $treDescricao = $_POST['treDescricao'];
-    $treResponsavel = $_POST['treResponsavel'];
-
-    $varErro = $novoTreinamento->inserirTreinamento($treTitulo, $treDescricao, $treResponsavel);
-    header('Location:' .basename(__FILE__));
-}
-
-$editTreinamento = new TreinamentosController;
-if (isset($_POST['editarTreinamento'])) {
-    $treId = $_POST['editTreinamentoId'];
-    $treTitulo = $_POST['editTreTitulo'];
-    $treDescricao = $_POST['editTreDescricao'];
-    $treResponsavel = $_POST['editTreResponsavel'];
-
-    $varErro = $editTreinamento->editarTreinamento($treId, $treTitulo, $treDescricao, $treResponsavel);
-    header('Location:' .basename(__FILE__));
-}
-
-$desativarTreinamento = new TreinamentosController;
-if (isset($_POST['desTreinamento'])) {
-    $treId = $_POST['desTreinamento'];
-    $varErro = $desativarTreinamento->disableTreinamento($treId);
-    //echo "teste";
-
-    header('Location:' .basename(__FILE__));
-}
-
+$colaboradores = (new ColaboradoresController)->getAllColaboradores();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -147,7 +115,7 @@ if (isset($_POST['desTreinamento'])) {
 
 
 
-                    <!-- DataTales Example -->
+                    <!-- Begin DataTable -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Treinamentos Cadastrados</h6>
@@ -158,30 +126,40 @@ if (isset($_POST['desTreinamento'])) {
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Título</th>
-                                            <th>Descrição</th>
-                                            <th>Responsável</th>
-                                            <th>Ações</th>
+                                            <th>Email</th>
+                                            <th>Nome</th>
+                                            <th>CPF</th>
+                                            <th>CEP</th>
+                                            <th>Cidade</th>
+                                            <th>Bairro</th>
+                                            <th>Número Residencial</th>
+                                            <th>Telefone</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($treinamentos as $treinamento): ?>
+                                        <?php foreach($colaboradores as $colaborador): ?>
+                                            
                                         <tr>
 
-                                            <td><?php echo $treinamento['tre_id']; ?></td>
-                                            <td><?php echo $treinamento['tre_titulo']; ?></td>
-                                            <td><?php echo $treinamento['tre_descricao']; ?></td>
-                                            <td><?php echo $treinamento['tre_responsavel']; ?></td>
-                                            <td>
-                                                <div class="container text-center">
+                                            <td><?php echo $colaborador['col_id']; ?></td>
+                                            <td><?php echo $colaborador['usu_email']; ?></td>
+                                            <td><?php echo $colaborador['pes_nome']; ?></td>
+                                            <td><?php echo $colaborador['pes_cpf']; ?></td>
+                                            <td><?php echo $colaborador['pes_cep']; ?></td>
+                                            <td><?php echo $colaborador['pes_cidade']; ?></td>
+                                            <td><?php echo $colaborador['pes_bairro']; ?></td>
+                                            <td><?php echo $colaborador['pes_numero']; ?></td>
+                                            <td><?php echo $colaborador['pes_telefone']; ?></td>
+                                            <!--<td>
+                                                 <div class="container text-center">
                                                     <div class="row">
                                                         <div class="col-6">
                                                             <button class="btn btn-primary btn-editar"
                                                                 data-toggle="modal" data-target="#editarTreinamento"
-                                                                data-id="<?php echo $treinamento['tre_id']; ?>"
-                                                                data-titulo="<?php echo $treinamento['tre_titulo']; ?>"
-                                                                data-descricao="<?php echo $treinamento['tre_descricao']; ?>"
-                                                                data-responsavel="<?php echo $treinamento['tre_responsavel']; ?>">
+                                                                data-id="<?php //echo $treinamento['tre_id']; ?>"
+                                                                data-titulo="<?php// echo $treinamento['tre_titulo']; ?>"
+                                                                data-descricao="<?php// echo $treinamento['tre_descricao']; ?>"
+                                                                data-responsavel="<?php// echo $treinamento['tre_responsavel']; ?>">
                                                                 <i class="fas fa-edit"></i>
                                                             </button>
                                                         </div>
@@ -189,14 +167,14 @@ if (isset($_POST['desTreinamento'])) {
                                                             <button type="submit"
                                                                 class="btn btn-danger btn-desativar mr-2"
                                                                 data-toggle="modal" data-target="#desativarTreinamento"
-                                                                data-id="<?php echo $treinamento['tre_id']; ?>"
+                                                                data-id="<?php// echo $treinamento['tre_id']; ?>"
                                                                 name="desativar">
                                                                 <i class="fas fa-ban"></i>
                                                             </button>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </td>
+                                            </td>-->
                                         </tr>
 
                                         <?php endforeach; ?>
@@ -206,6 +184,7 @@ if (isset($_POST['desTreinamento'])) {
                             </div>
                         </div>
                     </div>
+                    <!-- DataTable End -->
 
                 </div>
                 <!-- /.container-fluid -->
