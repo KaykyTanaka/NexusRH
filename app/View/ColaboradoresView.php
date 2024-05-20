@@ -13,7 +13,7 @@ if (isset($_POST['sair'])) {
 }
 
 $colaboradores = (new ColaboradoresController)->getAllColaboradores();
-if (isset($_POST['enviar'])) { 
+if (isset($_POST['enviar'])) {
     $pesNome = $_POST['pesNome'];
     $pesCPF = $_POST['pesCPF'];
     $pesCEP = $_POST['pesCEP'];
@@ -24,11 +24,20 @@ if (isset($_POST['enviar'])) {
     $usuEmail = $_POST['usuEmail'];
     $usuSenha = $_POST['usuSenha'];
 
-    $var = (new ColaboradoresController)->inserirColaborador($pesNome, $pesCPF, $pesCEP, $pesCidade, 
-    $pesBairro, $pesNumero, $pesTelefone, $usuEmail, $usuSenha);
-    header('Location:' .basename(__FILE__));
+    $var = (new ColaboradoresController)->inserirColaborador(
+        $pesNome,
+        $pesCPF,
+        $pesCEP,
+        $pesCidade,
+        $pesBairro,
+        $pesNumero,
+        $pesTelefone,
+        $usuEmail,
+        $usuSenha
+    );
+    header('Location:' . basename(__FILE__));
 }
-if(isset($_POST['salvarColaborador'])){
+if (isset($_POST['salvarColaborador'])) {
     $colID = $_POST['editColaboradorId'];
     $usuEmail = $_POST['editusuEmail'];
     $pesNome = $_POST['editpesNome'];
@@ -40,17 +49,26 @@ if(isset($_POST['salvarColaborador'])){
     $pesTelefone = $_POST['editpesTelefone'];
 
 
-    $var = (new ColaboradoresController)->editarColaborador($colID, $usuEmail, $pesNome, $pesCPF, $pesCEP, 
-    $pesCidade, $pesBairro, $pesNumero, $pesTelefone);
+    $var = (new ColaboradoresController)->editarColaborador(
+        $colID,
+        $usuEmail,
+        $pesNome,
+        $pesCPF,
+        $pesCEP,
+        $pesCidade,
+        $pesBairro,
+        $pesNumero,
+        $pesTelefone
+    );
     echo $var;
-    header('Location:' .basename(__FILE__));
+    header('Location:' . basename(__FILE__));
 }
 
 $desativarColaborador = new ColaboradoresController();
 if (isset($_POST['desColaborador'])) {
     $colID = $_POST['desColaborador'];
     $varErro = $desativarColaborador->disableColaborador($colID);
-    header('Location:' .basename(__FILE__));
+    header('Location:' . basename(__FILE__));
 }
 ?>
 <!DOCTYPE html>
@@ -183,9 +201,7 @@ if (isset($_POST['desColaborador'])) {
                     </div>
 
 
-
-
-                    <!-- Begin DataTable -->
+                    <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Colaboradores Cadastrados</h6>
@@ -204,53 +220,54 @@ if (isset($_POST['desColaborador'])) {
                                             <th>Bairro</th>
                                             <th>Número Residencial</th>
                                             <th>Telefone</th>
+                                            <th>Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach($colaboradores as $colaborador): ?>
+                                        <?php foreach ($colaboradores as $colaborador): ?>
 
-                                        <tr>
-                                            <!-- </?php echo array_search($colaborador['col_id'], $colaborador); ?> -->
-                                            <td><?php echo $colaborador['col_id']; ?></td>
-                                            <td><?php echo $colaborador['usu_email']; ?></td>
-                                            <td><?php echo $colaborador['pes_nome']; ?></td>
-                                            <td><?php echo $colaborador['pes_cpf']; ?></td>
-                                            <td><?php echo $colaborador['pes_cep']; ?></td>
-                                            <td><?php echo $colaborador['pes_cidade']; ?></td>
-                                            <td><?php echo $colaborador['pes_bairro']; ?></td>
-                                            <td><?php echo $colaborador['pes_numero']; ?></td>
-                                            <td><?php echo $colaborador['pes_telefone']; ?></td>
-                                            <td>
-                                                <div class="container text-center">
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <button class="btn btn-primary btn-editar"
-                                                                data-toggle="modal" data-target="#editarColaborador"
-                                                                data-id="<?php echo $colaborador['col_id']; ?>"
-                                                                data-email="<?php echo $colaborador['usu_email']; ?>"
-                                                                data-nome="<?php echo $colaborador['pes_nome']; ?>"
-                                                                data-cpf="<?php echo $colaborador['pes_cpf']; ?>"
-                                                                data-cep="<?php echo $colaborador['pes_cep']; ?>"
-                                                                data-cidade="<?php echo $colaborador['pes_cidade']; ?>"
-                                                                data-bairro="<?php echo $colaborador['pes_bairro']; ?>"
-                                                                data-numero="<?php echo $colaborador['pes_numero']; ?>"
-                                                                data-telefone="<?php echo $colaborador['pes_telefone']; ?>">
-                                                                <i class="fas fa-edit"></i>
-                                                            </button>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <button type="submit"
-                                                                class="btn btn-danger btn-desativar ml-2 mr-5"
-                                                                data-toggle="modal" data-target="#desativarColaborador"
-                                                                data-id="<?php echo $colaborador['col_id']; ?>"
-                                                                name="desativar">
-                                                                <i class="fas fa-ban"></i>
-                                                            </button>
+                                            <tr>
+                                                <!-- </?php echo array_search($colaborador['col_id'], $colaborador); ?> -->
+                                                <td><?php echo $colaborador['col_id']; ?></td>
+                                                <td><?php echo $colaborador['usu_email']; ?></td>
+                                                <td><?php echo $colaborador['pes_nome']; ?></td>
+                                                <td><?php echo $colaborador['pes_cpf']; ?></td>
+                                                <td><?php echo $colaborador['pes_cep']; ?></td>
+                                                <td><?php echo $colaborador['pes_cidade']; ?></td>
+                                                <td><?php echo $colaborador['pes_bairro']; ?></td>
+                                                <td><?php echo $colaborador['pes_numero']; ?></td>
+                                                <td><?php echo $colaborador['pes_telefone']; ?></td>
+                                                <td>
+                                                    <div class="container text-center">
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <button class="btn btn-primary btn-editar"
+                                                                    data-toggle="modal" data-target="#editarColaborador"
+                                                                    data-id="<?php echo $colaborador['col_id']; ?>"
+                                                                    data-email="<?php echo $colaborador['usu_email']; ?>"
+                                                                    data-nome="<?php echo $colaborador['pes_nome']; ?>"
+                                                                    data-cpf="<?php echo $colaborador['pes_cpf']; ?>"
+                                                                    data-cep="<?php echo $colaborador['pes_cep']; ?>"
+                                                                    data-cidade="<?php echo $colaborador['pes_cidade']; ?>"
+                                                                    data-bairro="<?php echo $colaborador['pes_bairro']; ?>"
+                                                                    data-numero="<?php echo $colaborador['pes_numero']; ?>"
+                                                                    data-telefone="<?php echo $colaborador['pes_telefone']; ?>">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <button type="submit"
+                                                                    class="btn btn-danger btn-desativar ml-2 mr-5"
+                                                                    data-toggle="modal" data-target="#desativarColaborador"
+                                                                    data-id="<?php echo $colaborador['col_id']; ?>"
+                                                                    name="desativar">
+                                                                    <i class="fas fa-ban"></i>
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
 
                                         <?php endforeach; ?>
 
@@ -259,7 +276,8 @@ if (isset($_POST['desColaborador'])) {
                             </div>
                         </div>
                     </div>
-                    <!-- DataTable End -->
+
+
 
                 </div>
                 <!-- /.container-fluid -->
@@ -303,8 +321,7 @@ if (isset($_POST['desColaborador'])) {
                         <input type="hidden" id="editColaboradorId" name="editColaboradorId">
                         <div class="form-group">
                             <label for="editusuEmail">Email:</label>
-                            <input type="text" class="form-control" id="editusuEmail" name="editusuEmail"
-                                required>
+                            <input type="text" class="form-control" id="editusuEmail" name="editusuEmail" required>
                         </div>
                         <div class="form-group">
                             <label for="editpesNome">Nome:</label>
@@ -332,7 +349,8 @@ if (isset($_POST['desColaborador'])) {
                         </div>
                         <div class="form-group">
                             <label for="editpesTelefone">Telefone:</label>
-                            <input type="text" class="form-control" id="editpesTelefone" name="editpesTelefone" required>
+                            <input type="text" class="form-control" id="editpesTelefone" name="editpesTelefone"
+                                required>
                         </div>
                         <!-- Deixarei o campo de senha de lado por enquanto
                         <div class="form-group">
@@ -378,63 +396,63 @@ if (isset($_POST['desColaborador'])) {
     <script src="js/demo/datatables-demo.js"></script>
 
     <script>
-    $(document).ready(function() {
-        //var </?php echo 'z'?> = $(this).data('titulo');
-        //$('#editTreTitulo').val(z);
-        // Evento de clique no botão de edição
-        $('.btn-editar').click(function() {
-            // Recupera o ID do treinamento do botão clicado
-            var idCol = $(this).data('id');
-            var usuEmail = $(this).data('email');
-            var pesNome = $(this).data('nome')
-            var pesCPF = $(this).data('cpf');
-            var pesCEP = $(this).data('cep');
-            var pesCidade = $(this).data('cidade');
-            var pesBairro = $(this).data('bairro');
-            var pesNumero = $(this).data('numero');
-            var pesTelefone = $(this).data('telefone');
-            console.log(usuEmail);
+        $(document).ready(function () {
+            //var </?php echo 'z'?> = $(this).data('titulo');
+            //$('#editTreTitulo').val(z);
+            // Evento de clique no botão de edição
+            $('.btn-editar').click(function () {
+                // Recupera o ID do treinamento do botão clicado
+                var idCol = $(this).data('id');
+                var usuEmail = $(this).data('email');
+                var pesNome = $(this).data('nome')
+                var pesCPF = $(this).data('cpf');
+                var pesCEP = $(this).data('cep');
+                var pesCidade = $(this).data('cidade');
+                var pesBairro = $(this).data('bairro');
+                var pesNumero = $(this).data('numero');
+                var pesTelefone = $(this).data('telefone');
+                console.log(usuEmail);
 
-            // Define os valores nos campos do formulário de edição
-            $('#editColaboradorId').val(idCol);
-            $('#editusuEmail').val(usuEmail);
-            $('#editpesNome').val(pesNome);
-            $('#editpesCPF').val(pesCPF);
-            $('#editpesCEP').val(pesCEP);
-            $('#editpesCidade').val(pesCidade);
-            $('#editpesBairro').val(pesBairro);
-            $('#editpesNumero').val(pesNumero);
-            $('#editpesTelefone').val(pesTelefone);
-        });
-        $('.btn-desativar').click(function() {
-            // Recupera o ID do treinamento do botão clicado
-            var colID = $(this).data('id');
-            Swal.fire({
-                title: "Tem certeza?",
-                text: "Você não conseguira reverter isto!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Deletar"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire({
-                        title: "Deletado!",
-                        text: "O usuário foi deletado com sucesso, redirecionando em 2 segundos.",
-                        icon: "success",
-                        timer: 2000
-                        //showConfirmButton: false
-                    }).then(function() {
-                        document.getElementById("desColaborador").value = colID;
-                        document.forms["formdesativarColaborador"].submit();
-                    });
-                    //document.formdesativarTreinamento.desTreinamento.value = treId;
-                }
+                // Define os valores nos campos do formulário de edição
+                $('#editColaboradorId').val(idCol);
+                $('#editusuEmail').val(usuEmail);
+                $('#editpesNome').val(pesNome);
+                $('#editpesCPF').val(pesCPF);
+                $('#editpesCEP').val(pesCEP);
+                $('#editpesCidade').val(pesCidade);
+                $('#editpesBairro').val(pesBairro);
+                $('#editpesNumero').val(pesNumero);
+                $('#editpesTelefone').val(pesTelefone);
             });
+            $('.btn-desativar').click(function () {
+                // Recupera o ID do treinamento do botão clicado
+                var colID = $(this).data('id');
+                Swal.fire({
+                    title: "Tem certeza?",
+                    text: "Você não conseguirá reverter isto!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Deletar"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: "Deletado!",
+                            text: "O usuário foi deletado com sucesso, redirecionando em 2 segundos.",
+                            icon: "success",
+                            timer: 2000
+                            //showConfirmButton: false
+                        }).then(function () {
+                            document.getElementById("desColaborador").value = colID;
+                            document.forms["formdesativarColaborador"].submit();
+                        });
+                        //document.formdesativarTreinamento.desTreinamento.value = treId;
+                    }
+                });
 
+            });
         });
-    });
     </script>
 
 </body>
