@@ -9,8 +9,9 @@ use \App\Controller\Renders;
 $banco = new LoginController;
 //var_dump($banco->getUsuario());
 //var_dump($banco->getUsuario()[0]);
-if (isset($_SESSION['usuario'])) {
-
+if(!isset($_SESSION['usuario'])){
+    $banco->destroy_sessoes();
+    header('Location: LoginView.php');
 }
 if (isset($_POST['sair'])) {
     $banco->destroy_sessoes();

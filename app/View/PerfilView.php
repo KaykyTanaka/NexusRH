@@ -9,9 +9,27 @@ $banco = new LoginController;
 //var_dump($banco->getUsuario());
 //var_dump($banco->getUsuario()[0]);
 //var_dump($banco->chamarTipo());
-if (!isset($_SESSION['usuario'])) {
-    //Alterar!!
+if(isset($_SESSION['usuario'])){
+    if($banco->getUsuario()[2] == "administrador"){
+        ?>
+        <script>
+            window.onload = function() {
+                Swal.fire({
+                title: "Acesso Não Permitido!",
+                text: "Apenas colaboradores podem acessar está pagina, encerrando sessão.",
+                icon: "error",
+                //timer: 2000,
+                showConfirmButton: true
+                }).then(function () {
+                    <?php $banco->destroy_sessoes(); ?>
+                    window.location='<?php echo dirname($_SERVER["PHP_SELF"])?>/LoginView.php';
+                })
+            };
+        </script>
+        <?php
+    }
 }
+header('Location: viewTreinamentos.php');
 if (isset($_POST['sair'])) {
     $banco->destroy_sessoes();
     header('Location: LoginView.php');

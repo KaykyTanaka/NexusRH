@@ -13,7 +13,6 @@ class TreinamentosController extends TreinamentosModel
     {
         $this->db = $this->BDConnection();
     }
-
     private function BDConnection()
     {
         try {
