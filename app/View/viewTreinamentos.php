@@ -22,6 +22,7 @@ $controllerTreinamentos = new TreinamentosController;
 if($banco->getUsuario()[2] == 'administrador'){
     $treinamentos = $controllerTreinamentos->getAllTreinamentos();
 }else if($banco->getUsuario()[2] == 'colaborador'){
+    //echo $banco->getID();
     $treinamentos = $controllerTreinamentos->getColabTreinamentos($banco->getID());
 }
 
@@ -106,11 +107,11 @@ if (isset($_POST['desTreinamento'])) {
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Treinamentos</h1>
-                    <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+                    <?php if ($banco->getUsuario()[2] == "administrador"): ?><button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal"
                         data-target="#novoTreinamento">
                         <i class="fas fa-plus fa-sm text-white-50"></i>
                         Treinamento
-                    </button>
+                    </button><?php endif; ?>
                 </div>
 
                 <!-- Modal -->

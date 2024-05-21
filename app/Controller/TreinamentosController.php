@@ -37,7 +37,7 @@ class TreinamentosController extends TreinamentosModel
         SELECT c.col_id FROM col_colaborador c 
         INNER JOIN usu_usuarios u USING (usu_id) 
         INNER JOIN pes_pessoas p USING (pes_id)
-        WHERE col_status = true and c.col_id = '$colID' and c.col_id = tc.col_id);");
+        WHERE col_status = true and u.usu_id = $colID and c.col_id = tc.col_id);");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     public function disableTreinamento($treinamentoId)
