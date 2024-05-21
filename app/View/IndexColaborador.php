@@ -29,6 +29,10 @@ if(isset($_SESSION['usuario'])){
         </script>
         <?php
     }
+    else{
+        $banco->destroy_sessoes();
+        header('Location: LoginView.php');
+    }
 }
 ?>
 <!DOCTYPE html>
