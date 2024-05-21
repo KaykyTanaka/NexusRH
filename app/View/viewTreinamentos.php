@@ -19,7 +19,11 @@ if (isset($_POST['sair'])) {
 }
 
 $controllerTreinamentos = new TreinamentosController;
-$treinamentos = $controllerTreinamentos->getAllTreinamentos();
+if($banco->getUsuario()[2] == 'administrador'){
+    $treinamentos = $controllerTreinamentos->getAllTreinamentos();
+}else if($banco->getUsuario()[2] == 'colaborador'){
+    $treinamentos = $controllerTreinamentos->getColabTreinamentos($banco->getID());
+}
 
 $novoTreinamento = new TreinamentosController;
 if (isset($_POST['enviar'])) {

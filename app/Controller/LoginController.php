@@ -32,6 +32,7 @@ class LoginController extends LoginModel
             $tipo = self::VerificarTipo($email);
             parent::setTipo($tipo);
             parent::setUsuario($email, $senha, $tipo);
+            echo $tipo;
             if ($tipo == "colaborador") {
                 header("Location: IndexColaborador.php");
             } else if ($tipo == "administrador") {

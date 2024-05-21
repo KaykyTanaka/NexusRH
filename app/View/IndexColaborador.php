@@ -36,8 +36,7 @@ if(isset($_SESSION['usuario'])){
         <?php
     }
     else{
-        $banco->destroy_sessoes();
-        header('Location: LoginView.php');
+        header('Location: viewTreinamentos.php');
     }
 }
 ?>
