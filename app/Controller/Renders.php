@@ -90,7 +90,9 @@ class Renders
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" <?php if ($tipo == "colaborador"): ?>href="IndexColaborador.php" <?php elseif ($tipo == "administrador"): ?>href="IndexAdministrador.php" <?php endif; ?>>
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" <?php if ($tipo == "colaborador"): ?>
+                href="IndexColaborador.php" 
+                <?php elseif ($tipo == "administrador"): ?>href="IndexAdministrador.php" <?php endif; ?>>
                 <div class="sidebar-brand-icon">
                     <img src="img/logo.svg" style="width: 45px;" alt="logo">
                 </div>
@@ -127,6 +129,13 @@ class Renders
                     </a>
                 <?php endif; ?>
             </li>
+            <?php if ($tipo == "administrador"): ?>
+            <li class="nav-item">
+                <a class="nav-link" href="TreinoColaboradores.php">
+                    <i class="fas fa-fw fa-user"></i><span>Treinamento/Colaboradores</span>
+                </a>
+            </li>
+            <?php endif; ?>
 
 
             <div class="text-center d-none d-md-inline">

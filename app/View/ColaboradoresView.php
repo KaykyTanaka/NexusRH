@@ -5,7 +5,6 @@ require dirname(__DIR__, 2) . '/vendor/autoload.php';
 use \App\Controller\ColaboradoresController;
 use \App\Controller\LoginController;
 use \App\Controller\Renders;
-use \App\Controller\Renders;
 
 $banco = new LoginController;
 if (isset($_POST['sair'])) {
@@ -35,8 +34,6 @@ if(isset($_SESSION['usuario'])){
     $banco->destroy_sessoes();
     header('Location: LoginView.php');
 }
-
-$colaboradores = (new ColaboradoresController)->getAllColaboradores();
 
 $colaboradores = (new ColaboradoresController)->getAllColaboradores();
 if (isset($_POST['enviar'])) {
@@ -132,7 +129,6 @@ if (isset($_POST['desColaborador'])) {
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php Renders::renderSidebar($banco->chamarTipo()); ?>
         <?php Renders::renderSidebar($banco->chamarTipo()); ?>
         <!-- End of Sidebar -->
 
