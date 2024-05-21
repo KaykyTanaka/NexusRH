@@ -5,6 +5,7 @@ require dirname(__DIR__, 2) . '/vendor/autoload.php';
 use \App\Controller\ColaboradoresController;
 use \App\Controller\LoginController;
 use \App\Controller\Renders;
+use \App\Controller\Renders;
 
 $banco = new LoginController;
 if (isset($_POST['sair'])) {
@@ -34,6 +35,8 @@ if(isset($_SESSION['usuario'])){
     $banco->destroy_sessoes();
     header('Location: LoginView.php');
 }
+
+$colaboradores = (new ColaboradoresController)->getAllColaboradores();
 
 $colaboradores = (new ColaboradoresController)->getAllColaboradores();
 if (isset($_POST['enviar'])) {
@@ -115,7 +118,7 @@ if (isset($_POST['desColaborador'])) {
 
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="css/colaboradores.css">
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="vendor/SweetAlert2/sweetalert2.min.css" rel="stylesheet">
@@ -129,6 +132,7 @@ if (isset($_POST['desColaborador'])) {
     <div id="wrapper">
 
         <!-- Sidebar -->
+        <?php Renders::renderSidebar($banco->chamarTipo()); ?>
         <?php Renders::renderSidebar($banco->chamarTipo()); ?>
         <!-- End of Sidebar -->
 
@@ -147,76 +151,102 @@ if (isset($_POST['desColaborador'])) {
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Colaboradores</h1>
-                        <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+                        <h3 class="mb-0">Colaboradores</h3>
+                        <button class="d-none d-sm-inline-block btn btn-sm azul-claro shadow-sm text-light" data-toggle="modal"
                             data-target="#novoTreinamento">
-                            <i class="fas fa-plus fa-sm text-white-50"></i>
+                            <i class="fas fa-plus fa-sm text-light"></i>
                             Colaborador
                         </button>
                     </div>
 
                     <!-- Modal -->
-                    <div class="modal" id="novoTreinamento" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="novoTreinamento" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
+                        <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Novo colaborador</h5>
+                                <div class="modal-header azul-nexus">
+                                    <h5 class="modal-title text-light font-weight-bold" id="exampleModalLabel">Novo Colaborador</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
+                                        <span aria-hidden="true" class="fechar">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form id="formNovoColaborador" method="POST">
+                                    <form id="formNovoColaborador" method="POST" class="font-weight-bold text-dark">
+                                        <div class="row">
+                                        <div class="col-12">
                                         <div class="form-group">
-                                            <p><span class="font-weight-bold">Pessoa:</span></p>
                                             <label for="pesNome">Nome:</label>
                                             <input type="text" class="form-control" id="pesNome" name="pesNome"
                                                 required>
+                                        </div>    
                                         </div>
+                                            <div class="col-6">
                                         <div class="form-group">
-                                            <label for="pesCPF">CPF:</label>
+                                            <label for="pesCPF">CPF:</label>    
                                             <input type="text" class="form-control" id="pesCPF" name="pesCPF" required>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="pesCEP">CEP:</label>
-                                            <input type="number" class="form-control" id="pesCEP" name="pesCEP"
-                                                required>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="pesCidade">Cidade:</label>
-                                            <input type="text" class="form-control" id="pesCidade" name="pesCidade"
-                                                required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="pesBairro">Bairro:</label>
-                                            <input type="text" class="form-control" id="pesBairro" name="pesBairro"
-                                                required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="pesNumero">Número da residência:</label>
-                                            <input type="number" class="form-control" id="pesNumero" name="pesNumero"
-                                                required>
-                                        </div>
+                                        <div class="col-6">
                                         <div class="form-group">
                                             <label for="pesTelefone">Telefone:</label>
                                             <input type="text" class="form-control" id="pesTelefone" name="pesTelefone"
                                                 required>
                                         </div>
+                                        </div>
+                                        <div class="col-4">
                                         <div class="form-group">
-                                            <p><span class="font-weight-bold">Usuário:</span></p>
+                                            <label for="pesCEP">CEP:</label>
+                                            <input type="number" class="form-control" id="pesCEP" name="pesCEP"
+                                                required>
+                                        </div>
+                                        </div>
+                                        <div class="col-8">
+                                        <div class="form-group">
+                                            <label for="pesCidade">Cidade:</label>
+                                            <input type="text" class="form-control" id="pesCidade" name="pesCidade"
+                                                required>
+                                        </div>
+                                        </div>
+                                        <div class="col-8">
+                                        <div class="form-group">
+                                            <label for="pesBairro">Bairro:</label>
+                                            <input type="text" class="form-control" id="pesBairro" name="pesBairro"
+                                                required>
+                                        </div>
+                                        </div>
+                                        <div class="col-4">
+                                        <div class="form-group">
+                                            <label for="pesNumero">Número da residência:</label>
+                                            <input type="number" class="form-control" id="pesNumero" name="pesNumero"
+                                                required>
+                                        </div>
+                                        </div>
+                                        <div class="col-12">
+                                        <hr class="border border-primary border-2 opacity-50">
+                                        </div>
+                                        <div class="col-12">
+                                        <p><span class="font-weight-bold">Usuário:</span></p>
+                                        </div>
+                                        <div class="col-6">
+                                        <div class="form-group">
                                             <label for="usuEmail">Email:</label>
                                             <input type="email" class="form-control" id="usuEmail" name="usuEmail"
                                                 required>
                                         </div>
+                                        </div>
+                                        <div class="col-6">
                                         <div class="form-group">
                                             <label for="usuSenha">Senha:</label>
                                             <input type="password" class="form-control" id="usuSenha" name="usuSenha"
                                                 required>
                                         </div>
+                                        </div>
+                                        <div class="col-6">
                                         <input type="submit" class="btn btn-primary" value="Enviar" name="enviar"></i>
-                                        <button type="button" class="btn btn-secondary"
+                                        <button type="button" class="btn btn-danger"
                                             data-dismiss="modal">Fechar</button>
+                                            </div>
+                                            </div>
                                     </form>
                                 </div>
                             </div>

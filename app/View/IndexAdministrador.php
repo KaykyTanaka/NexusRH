@@ -8,7 +8,9 @@ use \App\Controller\Renders;
 $banco = new LoginController;
 //var_dump($banco->getUsuario());
 //var_dump($banco->chamarTipo());
-header('Location: viewTreinamentos.php'); //Alterar!!
+if (!isset($_SESSION['usuario'])) {
+    header('Location: viewTreinamentos.php'); //Alterar!!
+}
 if (isset($_POST['sair'])) {
     $banco->destroy_sessoes();
     header('Location: LoginView.php');

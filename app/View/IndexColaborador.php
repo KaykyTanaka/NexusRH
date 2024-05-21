@@ -6,6 +6,12 @@ use \App\Controller\LoginController;
 use \App\Controller\Renders;
 
 $banco = new LoginController;
+//var_dump($banco->getUsuario());
+//var_dump($banco->getUsuario()[0]);
+//var_dump($banco->chamarTipo());
+if (!isset($_SESSION['usuario'])) {
+    //header('Location: PerfilView.php'); //Alterar!!
+}
 if (isset($_POST['sair'])) {
     $banco->destroy_sessoes();
     header('Location: LoginView.php');
