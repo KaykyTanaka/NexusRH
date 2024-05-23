@@ -75,8 +75,8 @@ if (isset($_POST['desTreinamento'])) {
 
     <!-- Custom styles for this page -->
     <link rel="stylesheet" href="css/estiloNexus.css">
+    <link href="vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <script src="vendor/sweetalert2/dist/sweetalert2.min.js"></script>
 
 </head>
 <!-- Page Wrapper -->
@@ -233,7 +233,7 @@ if (isset($_POST['desTreinamento'])) {
     <i class="fas fa-angle-up"></i>
 </a>
 <!-- Modal de Edição de Treinamento -->
-<div class="modal" id="editarTreinamento" tabindex="-1" role="dialog" aria-labelledby="editarTreinamentoLabel"
+<div class="modal fade" id="editarTreinamento" tabindex="-1" role="dialog" aria-labelledby="editarTreinamentoLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -293,7 +293,7 @@ if (isset($_POST['desTreinamento'])) {
 <!-- Page level plugins -->
 <script src="vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<link href="vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+<script src="vendor/sweetalert2/sweetalert2.all.min.js"></script>
 <script src="js/demo/datatables-demo.js"></script>
 
 <script src="https://cdn.datatables.net/plug-ins/1.11.5/sorting/natural.js"></script>
@@ -320,15 +320,16 @@ if (isset($_POST['desTreinamento'])) {
             // Recupera o ID do treinamento do botão clicado
             var treId = $(this).data('id');
 
-            $('#desTreinamento').val(treId);
+            //$('#desTreinamento').val(treId);
             Swal.fire({
                 title: "Tem certeza?",
                 text: "Você não conseguira reverter isto!",
                 icon: "warning",
-                showCancelButton: true,
+                showDenyButton: true,
                 confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Deletar"
+                denyButtonColor: "#d33",
+                confirmButtonText: "Deletar",
+                denyButtonText: "Cancelar"
             }).then((result) => {
                 if (result.isConfirmed) {
                     Swal.fire({
@@ -342,6 +343,15 @@ if (isset($_POST['desTreinamento'])) {
                         document.forms["formdesativarTreinamento"].submit();
                     });
                     //document.formdesativarTreinamento.desTreinamento.value = treId;
+                } else if (result.isDenied) {
+                    Swal.fire({
+                        title: 'Cancelado.', 
+                        text: 'As mudanças não foram feitas', 
+                        icon: 'info',
+                        timer: 3000
+                    }).then(function () {
+                        location.reload()
+                    });
                 }
             });
 
