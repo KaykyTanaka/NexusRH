@@ -74,6 +74,7 @@ if (isset($_POST['desTreinamento'])) {
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Custom styles for this page -->
+    <link rel="stylesheet" href="css/estiloNexus.css">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <script src="vendor/sweetalert2/dist/sweetalert2.min.js"></script>
 
@@ -101,26 +102,26 @@ if (isset($_POST['desTreinamento'])) {
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Treinamentos</h1>
-                    <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal"
-                        data-target="#novoTreinamento">
-                        <i class="fas fa-plus fa-sm text-white-50"></i>
-                        Treinamento
-                    </button>
+                    <button class="d-none d-sm-inline-block btn btn-sm azul-claro shadow-sm text-light" data-toggle="modal"
+                            data-target="#novoTreinamento">
+                            <i class="fas fa-plus fa-sm text-light"></i>
+                            Treinamento
+                        </button>
                 </div>
 
                 <!-- Modal -->
-                <div class="modal" id="novoTreinamento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                <div class="modal fade" id="novoTreinamento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Novo treinamento</h5>
+                            <div class="modal-header azul-nexus">
+                                <h5 class="modal-title text-light font-weight-bold" id="exampleModalLabel">Novo treinamento</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+                                    <span aria-hidden="true" class="fechar">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form id="formNovoTreinamento" method="POST">
+                                <form id="formNovoTreinamento" method="POST" class ="font-weight-bold text-dark">
                                     <div class="form-group">
                                         <label for="treTitulo">Título do Treinamento:</label>
                                         <input type="text" class="form-control" id="treTitulo" name="treTitulo"
@@ -137,7 +138,7 @@ if (isset($_POST['desTreinamento'])) {
                                             name="treResponsavel" required>
                                     </div>
                                     <button type="submit" class="btn btn-primary" name="enviar">Enviar</button>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
                                 </form>
                             </div>
                         </div>
@@ -236,14 +237,14 @@ if (isset($_POST['desTreinamento'])) {
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editarTreinamentoLabel">Editar Treinamento</h5>
+            <div class="modal-header azul-nexus">
+                <h5 class="modal-title  text-light font-weight-bold" id="editarTreinamentoLabel">Editar Treinamento</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true" class ="fechar">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="formEditarTreinamento" method="POST">
+                <form id="formEditarTreinamento" method="POST" class="font-weight-bold text-dark">
                     <input type="hidden" id="editTreinamentoId" name="editTreinamentoId">
                     <div class="form-group">
                         <label for="editTreTitulo">Título do Treinamento:</label>
@@ -261,7 +262,7 @@ if (isset($_POST['desTreinamento'])) {
                     </div>
                     <button type="submit" class="btn btn-primary" name="editarTreinamento">Salvar
                         Alterações</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
                 </form>
             </div>
         </div>

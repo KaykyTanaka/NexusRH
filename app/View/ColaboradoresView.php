@@ -92,7 +92,7 @@ if (isset($_POST['desColaborador'])) {
 
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/colaboradores.css">
+    <link rel="stylesheet" href="css/estiloNexus.css">
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="vendor/SweetAlert2/sweetalert2.min.css" rel="stylesheet">
@@ -124,16 +124,16 @@ if (isset($_POST['desColaborador'])) {
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h3 class="mb-0">Colaboradores</h3>
+                        <h3 class="mb-0 text-dark">Colaboradores</h3>
                         <button class="d-none d-sm-inline-block btn btn-sm azul-claro shadow-sm text-light" data-toggle="modal"
-                            data-target="#novoTreinamento">
+                            data-target="#novoColaborador">
                             <i class="fas fa-plus fa-sm text-light"></i>
                             Colaborador
                         </button>
                     </div>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="novoTreinamento" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="novoColaborador" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">

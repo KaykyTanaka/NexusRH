@@ -123,7 +123,7 @@ class Renders
                         <i class="fas fa-fw fa-user"></i><span>Perfil</span></a>
                 <?php elseif ($tipo == "administrador"): ?>
                     <a class="nav-link" href="ColaboradoresView.php">
-                        <i class="fas fa-fw fa-user"></i><span>Usúarios</span>
+                        <i class="fas fa-fw fa-user"></i><span>Usuários</span>
                     </a>
                 <?php endif; ?>
             </li>
