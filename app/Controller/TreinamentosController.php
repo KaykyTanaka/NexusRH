@@ -31,8 +31,8 @@ class TreinamentosController extends TreinamentosModel
     }
     public function getColabTreinamentos($colID)
     {
-        $stmt = 
-        $this->db->query("SELECT t.*  FROM tre_treinamento t, col_colaborador c, treinamentos_do_colaborador tc where
+        $stmt =
+            $this->db->query("SELECT t.*  FROM tre_treinamento t, col_colaborador c, treinamentos_do_colaborador tc where
         t.tre_id = tc.tre_id and c.col_id in (
         SELECT c.col_id FROM col_colaborador c 
         INNER JOIN usu_usuarios u USING (usu_id) 

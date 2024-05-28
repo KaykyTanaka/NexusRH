@@ -28,8 +28,8 @@ class TreiColabController extends ColaboradoresModel
     public function getAllTreiColab()
     {
         $teste = self::BDConnection();
-        $stmt = 
-        $teste->query('SELECT p.pes_nome, t.tre_titulo, t.tre_responsavel FROM treinamentos_do_colaborador
+        $stmt =
+            $teste->query('SELECT p.pes_nome, t.tre_titulo, t.tre_responsavel FROM treinamentos_do_colaborador
         INNER JOIN tre_treinamento t USING (tre_id)
         INNER JOIN col_colaborador c USING (col_id)
         INNER JOIN usu_usuarios USING (usu_id)
@@ -37,7 +37,8 @@ class TreiColabController extends ColaboradoresModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getColaboradores(){
+    public function getColaboradores()
+    {
         $sql = 'SELECT c.col_id, p.pes_nome
         FROM col_colaborador c INNER JOIN usu_usuarios u USING (usu_id) INNER JOIN pes_pessoas p USING (pes_id)
         WHERE col_status = true';
@@ -45,7 +46,8 @@ class TreiColabController extends ColaboradoresModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getTreinamentos(){
+    public function getTreinamentos()
+    {
         $sql = 'SELECT tre_id, tre_titulo
         FROM tre_treinamento';
         $stmt = $this->db->query($sql);
