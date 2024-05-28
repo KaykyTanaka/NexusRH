@@ -27,9 +27,8 @@ class ColaboradoresController extends ColaboradoresModel
 
     public function getAllColaboradores()
     {
-        $teste = self::BDConnection();
         $stmt = 
-        $teste->query('SELECT c.col_id, u.usu_email, p.pes_nome, p.pes_cpf, p.pes_cep, 
+        $this->db->query('SELECT c.col_id, u.usu_email, p.pes_nome, p.pes_cpf, p.pes_cep, 
         p.pes_cidade, p.pes_bairro, p.pes_numero, p.pes_telefone
         FROM col_colaborador c INNER JOIN usu_usuarios u ON c.usu_id = u.usu_id INNER JOIN pes_pessoas p USING (pes_id)
         WHERE col_status = true');

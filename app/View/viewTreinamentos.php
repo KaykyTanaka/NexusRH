@@ -9,8 +9,9 @@ use \App\Controller\Renders;
 $banco = new LoginController;
 //var_dump($banco->getUsuario());
 //var_dump($banco->getUsuario()[0]);
-if (isset($_SESSION['usuario'])) {
-
+if(!isset($_SESSION['usuario'])){
+    $banco->destroy_sessoes();
+    header('Location: LoginView.php');
 }
 if (isset($_POST['sair'])) {
     $banco->destroy_sessoes();
@@ -18,7 +19,12 @@ if (isset($_POST['sair'])) {
 }
 
 $controllerTreinamentos = new TreinamentosController;
-$treinamentos = $controllerTreinamentos->getAllTreinamentos();
+if($banco->getUsuario()[2] == 'administrador'){
+    $treinamentos = $controllerTreinamentos->getAllTreinamentos();
+}else if($banco->getUsuario()[2] == 'colaborador'){
+    //echo $banco->getID();
+    $treinamentos = $controllerTreinamentos->getColabTreinamentos($banco->getID());
+}
 
 $novoTreinamento = new TreinamentosController;
 if (isset($_POST['enviar'])) {
@@ -102,11 +108,11 @@ if (isset($_POST['desTreinamento'])) {
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Treinamentos</h1>
-                    <button class="d-none d-sm-inline-block btn btn-sm azul-claro shadow-sm text-light" data-toggle="modal"
-                            data-target="#novoTreinamento">
-                            <i class="fas fa-plus fa-sm text-light"></i>
-                            Treinamento
-                        </button>
+                    <?php if ($banco->getUsuario()[2] == "administrador"): ?><button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+                        data-target="#novoTreinamento">
+                        <i class="fas fa-plus fa-sm text-white-50"></i>
+                        Treinamento
+                    </button><?php endif; ?>
                 </div>
 
                 <!-- Modal -->

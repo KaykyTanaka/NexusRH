@@ -16,6 +16,29 @@ if (isset($_POST['sair'])) {
     $banco->destroy_sessoes();
     header('Location: LoginView.php');
 }
+if(isset($_SESSION['usuario'])){
+    if($banco->getUsuario()[2] == "administrador"){
+        ?>
+        <script>
+           window.onload = function() {
+                Swal.fire({
+                title: "Acesso Não Permitido!",
+                text: "Apenas colaboradores podem acessar está pagina, encerrando sessão.",
+                icon: "error",
+                //timer: 2000,
+                showConfirmButton: true
+                }).then(function () {
+                    <?php $banco->destroy_sessoes(); ?>
+                    window.location='<?php echo dirname($_SERVER["PHP_SELF"])?>/LoginView.php';
+                })
+            };
+        </script>
+        <?php
+    }
+    else{
+        header('Location: viewTreinamentos.php');
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -113,6 +136,7 @@ if (isset($_POST['sair'])) {
     <script src="vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
+    <script src="vendor/SweetAlert2/sweetalert2.all.min.js"></script>
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
 

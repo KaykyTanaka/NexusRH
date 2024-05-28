@@ -29,9 +29,10 @@ class LoginController extends LoginModel
         $chamada = $banco->query("SELECT usu_id, usu_email, usu_senha FROM usu_usuarios;");
         $modelLogin = self::VerificarLogin($chamada, $email, $senha, $login);
         if ($modelLogin == true) {
-            parent::setUsuario($email, $senha);
             $tipo = self::VerificarTipo($email);
             parent::setTipo($tipo);
+            parent::setUsuario($email, $senha, $tipo);
+            echo $tipo;
             if ($tipo == "colaborador") {
                 header("Location: IndexColaborador.php");
             } else if ($tipo == "administrador") {

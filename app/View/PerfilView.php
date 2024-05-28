@@ -7,15 +7,37 @@ use \App\Controller\Renders;
 
 $banco = new LoginController;
 //var_dump($banco->getUsuario());
+//var_dump($banco->getUsuario()[0]);
 //var_dump($banco->chamarTipo());
-header('Location: viewTreinamentos.php'); //Alterar!!
+if(isset($_SESSION['usuario'])){
+    if($banco->getUsuario()[2] == "administrador"){
+        ?>
+        <script>
+            window.onload = function() {
+                Swal.fire({
+                title: "Acesso Não Permitido!",
+                text: "Apenas colaboradores podem acessar está pagina, encerrando sessão.",
+                icon: "error",
+                //timer: 2000,
+                showConfirmButton: true
+                }).then(function () {
+                    <?php $banco->destroy_sessoes(); ?>
+                    window.location='<?php echo dirname($_SERVER["PHP_SELF"])?>/LoginView.php';
+                })
+            };
+        </script>
+        <?php
+    }
+}
+header('Location: viewTreinamentos.php');
 if (isset($_POST['sair'])) {
     $banco->destroy_sessoes();
     header('Location: LoginView.php');
 }
 ?>
+
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 
 <head>
 
@@ -43,7 +65,7 @@ if (isset($_POST['sair'])) {
         <div id="wrapper">
 
             <!-- Sidebar -->
-            <?php Renders::renderSidebar($banco->chamarTipo()) ?>
+            <?php Renders::renderSidebar($banco->chamarTipo()); ?>
             <!-- End of Sidebar -->
 
             <!-- Content Wrapper -->
@@ -61,11 +83,9 @@ if (isset($_POST['sair'])) {
 
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Treinamentos</h1>
-                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                    class="fas fa-plus fa-sm text-white-50"></i>Treinamento</a>
-
+                            <h1 class="h3 mb-0 text-gray-800">?</h1>
                         </div>
+
 
                     </div>
                     <!-- /.container-fluid -->
@@ -94,8 +114,9 @@ if (isset($_POST['sair'])) {
             <i class="fas fa-angle-up"></i>
         </a>
 
-    <!-- Logout Modal-->
+
     <?php Renders::logoutModal(); ?>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

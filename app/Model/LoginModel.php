@@ -40,10 +40,11 @@ class LoginModel
     {
         $_SESSION['tipo'] = $tipo;
     }
-    static function setUsuario($email, $senha)
+    static function setUsuario($email, $senha, $tipo)
     {
-        $_SESSION['email'] = $email;
-        $_SESSION['senha'] = $senha;
+        // $_SESSION['email'] = $email;
+        // $_SESSION['senha'] = $senha;
+        $_SESSION['usuario'] = array($email, $senha, $tipo);
     }
     static function getID()
     {
@@ -55,7 +56,7 @@ class LoginModel
     }
     static function getUsuario()
     {
-        return [$_SESSION['email'], $_SESSION['senha']];
+        return $_SESSION['usuario'];
     }
     static function destroy_sessoes()
     {

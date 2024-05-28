@@ -11,6 +11,29 @@ if (isset($_POST['sair'])) {
     $banco->destroy_sessoes();
     header('Location: LoginView.php');
 }
+if(isset($_SESSION['usuario'])){
+    if($banco->getUsuario()[2] == "colaborador"){
+        ?>
+        <script>
+            window.onload = function() {
+                Swal.fire({
+                title: "Acesso Não Permitido!",
+                text: "Apenas administradores podem acessar está pagina, encerrando sessão.",
+                icon: "error",
+                //timer: 2000,
+                showConfirmButton: true
+                }).then(function () {
+                    <?php $banco->destroy_sessoes(); ?>
+                    window.location='<?php echo dirname($_SERVER["PHP_SELF"])?>/LoginView.php';
+                })
+            };
+        </script>
+        <?php
+    }
+}else{
+    $banco->destroy_sessoes();
+    header('Location: LoginView.php');
+}
 
 $colaboradores = (new ColaboradoresController)->getAllColaboradores();
 if (isset($_POST['enviar'])) {

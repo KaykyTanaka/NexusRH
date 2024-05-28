@@ -13,7 +13,6 @@ class TreinamentosController extends TreinamentosModel
     {
         $this->db = $this->BDConnection();
     }
-
     private function BDConnection()
     {
         try {
@@ -30,7 +29,17 @@ class TreinamentosController extends TreinamentosModel
         $stmt = $teste->query('SELECT * FROM tre_treinamento WHERE tre_ativo = true;');
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
+    public function getColabTreinamentos($colID)
+    {
+        $stmt = 
+        $this->db->query("SELECT t.*  FROM tre_treinamento t, col_colaborador c, treinamentos_do_colaborador tc where
+        t.tre_id = tc.tre_id and c.col_id in (
+        SELECT c.col_id FROM col_colaborador c 
+        INNER JOIN usu_usuarios u USING (usu_id) 
+        INNER JOIN pes_pessoas p USING (pes_id)
+        WHERE col_status = true and u.usu_id = $colID and c.col_id = tc.col_id);");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     public function disableTreinamento($treinamentoId)
     {
         $stmt = $this->db->prepare('UPDATE tre_treinamento SET tre_ativo = false WHERE tre_id = :id');
