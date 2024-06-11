@@ -4,8 +4,28 @@ namespace App\Controller;
 use \PDO;
 use \PDOException;
 
+if(isset($_POST["colaboradorId"])){
+    header("Content-type: application/json; charset=utf-8");
+    $retornocoltreinos = (new ColaboradoresController())->getTreinamentosByColaboradorId($_POST["colaboradorId"]);
+    $i=0;
+    $tre_nomes = array();
+    foreach($retornocoltreinos as $retorno){
+        foreach($retorno as $tre_nome){
+            if($retorno["tre_titulo"] == $tre_nome){
+                $tre_nomes[$i] = $tre_nome;
+                //echo $tre_nomes[$i];
+                $i++;
+            }
+            
+        }
+    } 
+    if(sizeof($tre_nomes) > 0) {
+        echo json_encode($tre_nomes);
+    }
+}
 class ColaboradoresController
 {
+
     private $db;
 
     public function __construct()
@@ -134,6 +154,7 @@ class ColaboradoresController
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
 
 
 

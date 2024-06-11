@@ -548,22 +548,24 @@ if (isset($_POST['desColaborador'])) {
                 // Chamada Ajax para recuperar os treinamentos do colaborador
                 $.ajax({
                     url: '../Controller/ColaboradoresController.php', // Substitua pelo caminho do seu arquivo PHP
-                    type: 'GET',
-                    data: { colaboradorId: idCol },
+                    type: 'POST',
+                    data: { "colaboradorId": idCol },
                     success: function (response) {
                         console.log(response); // Imprime a resposta no console para depuração
                         $('#listaTreinamentos').empty();
                         // Verifica se a resposta é um array
                         if (Array.isArray(response)) {
+                            
                             response.forEach(function (treinamento) {
-                                $('#listaTreinamentos').append('<li>' + treinamento.tre_nome + '</li>');
+                                console.log(treinamento);
+                                $('#listaTreinamentos').append('<li>' + treinamento + '</li>');
                             });
-                        } else {
-                            $('#listaTreinamentos').append('<li>Nenhum treinamento encontrado.</li>');
                         }
                     },
                     error: function () {
+                        $('#listaTreinamentos').empty();
                         alert('Erro ao carregar os treinamentos do colaborador.');
+                        $('#listaTreinamentos').append('<li>Nenhum treinamento encontrado.</li>');
                     }
                 });
             });

@@ -23,6 +23,18 @@ class LoginController extends LoginModel
             exit;
         }
     }
+    public function LoginInjection($email, $senha){
+        $banco = self::BDConnection();
+        $sql = "SELECT usu_id, usu_email, usu_senha FROM usu_usuarios WHERE usu_email = '".$email."' AND usu_senha = '".$senha."' ";
+        $chamada = $banco->query($sql);
+        $linha = $chamada->fetch(PDO::FETCH_ASSOC);
+        if(isset($linha) && $linha != false){
+            var_dump($linha);
+            header("Location: viewTreinamentos_sqlinjection.php");
+        }
+        return $linha;
+    }
+
     public function BDLogin($email, $senha, $login)
     {
         $banco = self::BDConnection();
