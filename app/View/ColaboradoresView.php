@@ -34,6 +34,13 @@ if (isset($_SESSION['usuario'])) {
     $banco->destroy_sessoes();
     header('Location: LoginView.php');
 }
+/* 
+$colaboradorIdTeste = 10;
+$teste = (new ColaboradoresController)->getTreinamentosByColaboradorId($colaboradorIdTeste);
+echo "<pre>";
+print_r($teste);
+echo "</pre>"; */
+
 
 $colaboradores = (new ColaboradoresController)->getAllColaboradores();
 if (isset($_POST['enviar'])) {
@@ -267,11 +274,6 @@ if (isset($_POST['desColaborador'])) {
                                             <th>Email</th>
                                             <th>Nome</th>
                                             <th>CPF</th>
-                                            <th>CEP</th>
-                                            <th>Cidade</th>
-                                            <th>Bairro</th>
-                                            <th>Número Residencial</th>
-                                            <th>Telefone</th>
                                             <th>Ações</th>
                                         </tr>
                                     </thead>
@@ -284,15 +286,26 @@ if (isset($_POST['desColaborador'])) {
                                                 <td><?php echo $colaborador['usu_email']; ?></td>
                                                 <td><?php echo $colaborador['pes_nome']; ?></td>
                                                 <td><?php echo $colaborador['pes_cpf']; ?></td>
-                                                <td><?php echo $colaborador['pes_cep']; ?></td>
-                                                <td><?php echo $colaborador['pes_cidade']; ?></td>
-                                                <td><?php echo $colaborador['pes_bairro']; ?></td>
-                                                <td><?php echo $colaborador['pes_numero']; ?></td>
-                                                <td><?php echo $colaborador['pes_telefone']; ?></td>
                                                 <td>
                                                     <div class="container text-center">
                                                         <div class="row">
-                                                            <div class="col-6">
+                                                            <div class="col-3 m-1">
+                                                                <button class="btn btn-primary btn-visualizar"
+                                                                    data-toggle="modal" data-target="#visualizarColaborador"
+                                                                    data-id="<?php echo $colaborador['col_id']; ?>"
+                                                                    data-email="<?php echo $colaborador['usu_email']; ?>"
+                                                                    data-nome="<?php echo $colaborador['pes_nome']; ?>"
+                                                                    data-cpf="<?php echo $colaborador['pes_cpf']; ?>"
+                                                                    data-cep="<?php echo $colaborador['pes_cep']; ?>"
+                                                                    data-cidade="<?php echo $colaborador['pes_cidade']; ?>"
+                                                                    data-bairro="<?php echo $colaborador['pes_bairro']; ?>"
+                                                                    data-numero="<?php echo $colaborador['pes_numero']; ?>"
+                                                                    data-telefone="<?php echo $colaborador['pes_telefone']; ?>">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </button>
+                                                            </div>
+
+                                                            <div class="col-3 m-1">
                                                                 <button class="btn btn-primary btn-editar"
                                                                     data-toggle="modal" data-target="#editarColaborador"
                                                                     data-id="<?php echo $colaborador['col_id']; ?>"
@@ -307,7 +320,8 @@ if (isset($_POST['desColaborador'])) {
                                                                     <i class="fas fa-edit"></i>
                                                                 </button>
                                                             </div>
-                                                            <div class="col-6">
+
+                                                            <div class="col-3 m-1">
                                                                 <button type="submit"
                                                                     class="btn btn-danger btn-desativar ml-2 mr-5"
                                                                     data-toggle="modal" data-target="#desativarColaborador"
@@ -357,6 +371,65 @@ if (isset($_POST['desColaborador'])) {
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
+
+    <!-- Modal de Visualização do Colaborador -->
+    <div class="modal" id="visualizarColaborador" tabindex="-1" role="dialog"
+        aria-labelledby="visualizarColaboradorLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="visualizarColaboradorLabel">Visualizar Colaborador</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="viewColaboradorId" name="viewColaboradorId">
+                    <div class="form-group">
+                        <label for="viewusuEmail">Email:</label>
+                        <input type="text" class="form-control" id="viewusuEmail" name="viewusuEmail" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="viewpesNome">Nome:</label>
+                        <input type="text" class="form-control" id="viewpesNome" name="viewpesNome" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="viewpesCPF">CPF:</label>
+                        <input type="text" class="form-control" id="viewpesCPF" name="viewpesCPF" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="viewpesCEP">CEP:</label>
+                        <input type="text" class="form-control" id="viewpesCEP" name="viewpesCEP" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="viewpesCidade">Cidade:</label>
+                        <input type="text" class="form-control" id="viewpesCidade" name="viewpesCidade" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="viewpesBairro">Bairro:</label>
+                        <input type="text" class="form-control" id="viewpesBairro" name="viewpesBairro" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="viewpesNumero">Número residencial:</label>
+                        <input type="text" class="form-control" id="viewpesNumero" name="viewpesNumero" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="viewpesTelefone">Telefone:</label>
+                        <input type="text" class="form-control" id="viewpesTelefone" name="viewpesTelefone" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="viewpesTreinamentos">Treinamentos:</label>
+                        <ul id="listaTreinamentos"></ul>
+                    </div>
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <!-- Modal de Edição de Treinamento -->
     <div class="modal" id="editarColaborador" tabindex="-1" role="dialog" aria-labelledby="editarColaboradorLabel"
         aria-hidden="true">
@@ -418,7 +491,6 @@ if (isset($_POST['desColaborador'])) {
         </div>
     </div>
 
-
     <div class="modal" name="desativarColaborador" id="desativarColaborador" tabindex="-1" role="dialog"
         aria-labelledby="desativarColaboradorLabel" aria-hidden="true">
         <form name="formdesativarColaborador" id="formdesativarColaborador" method="POST">
@@ -428,7 +500,6 @@ if (isset($_POST['desColaborador'])) {
 
     <!-- Logout Modal-->
     <?php Renders::logoutModal(); ?>
-
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -452,6 +523,52 @@ if (isset($_POST['desColaborador'])) {
             //var </?php echo 'z'?> = $(this).data('titulo');
             //$('#editTreTitulo').val(z);
             // Evento de clique no botão de edição
+
+            $('.btn-visualizar').click(function () {
+                var idCol = $(this).data('id');
+                var usuEmail = $(this).data('email');
+                var pesNome = $(this).data('nome');
+                var pesCPF = $(this).data('cpf');
+                var pesCEP = $(this).data('cep');
+                var pesCidade = $(this).data('cidade');
+                var pesBairro = $(this).data('bairro');
+                var pesNumero = $(this).data('numero');
+                var pesTelefone = $(this).data('telefone');
+
+                $('#viewColaboradorId').val(idCol);
+                $('#viewusuEmail').val(usuEmail);
+                $('#viewpesNome').val(pesNome);
+                $('#viewpesCPF').val(pesCPF);
+                $('#viewpesCEP').val(pesCEP);
+                $('#viewpesCidade').val(pesCidade);
+                $('#viewpesBairro').val(pesBairro);
+                $('#viewpesNumero').val(pesNumero);
+                $('#viewpesTelefone').val(pesTelefone);
+
+                // Chamada Ajax para recuperar os treinamentos do colaborador
+                $.ajax({
+                    url: '../Controller/ColaboradoresController.php', // Substitua pelo caminho do seu arquivo PHP
+                    type: 'GET',
+                    data: { colaboradorId: idCol },
+                    success: function (response) {
+                        console.log(response); // Imprime a resposta no console para depuração
+                        $('#listaTreinamentos').empty();
+                        // Verifica se a resposta é um array
+                        if (Array.isArray(response)) {
+                            response.forEach(function (treinamento) {
+                                $('#listaTreinamentos').append('<li>' + treinamento.tre_nome + '</li>');
+                            });
+                        } else {
+                            $('#listaTreinamentos').append('<li>Nenhum treinamento encontrado.</li>');
+                        }
+                    },
+                    error: function () {
+                        alert('Erro ao carregar os treinamentos do colaborador.');
+                    }
+                });
+            });
+
+
             $('.btn-editar').click(function () {
                 // Recupera o ID do treinamento do botão clicado
                 var idCol = $(this).data('id');
@@ -476,6 +593,7 @@ if (isset($_POST['desColaborador'])) {
                 $('#editpesNumero').val(pesNumero);
                 $('#editpesTelefone').val(pesTelefone);
             });
+
             $('.btn-desativar').click(function () {
                 // Recupera o ID do treinamento do botão clicado
                 var colID = $(this).data('id');
@@ -506,9 +624,7 @@ if (isset($_POST['desColaborador'])) {
             });
         });
     </script>
-
 </body>
 
 </html>
-
 <?php $_POST = array(); ?>

@@ -1,12 +1,10 @@
 <?php
 namespace App\Controller;
 
-use \App\Model\ColaboradoresModel;
-use \App\Controller\LoginController;
 use \PDO;
 use \PDOException;
 
-class ColaboradoresController extends ColaboradoresModel
+class ColaboradoresController
 {
     private $db;
 
@@ -27,8 +25,8 @@ class ColaboradoresController extends ColaboradoresModel
 
     public function getAllColaboradores()
     {
-        $stmt = 
-        $this->db->query('SELECT c.col_id, u.usu_email, p.pes_nome, p.pes_cpf, p.pes_cep, 
+        $stmt =
+            $this->db->query('SELECT c.col_id, u.usu_email, p.pes_nome, p.pes_cpf, p.pes_cep, 
         p.pes_cidade, p.pes_bairro, p.pes_numero, p.pes_telefone
         FROM col_colaborador c INNER JOIN usu_usuarios u ON c.usu_id = u.usu_id INNER JOIN pes_pessoas p USING (pes_id)
         WHERE col_status = true');
@@ -62,7 +60,7 @@ class ColaboradoresController extends ColaboradoresModel
             while ($linha = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $id = $linha['pes_id'];
             }
-            
+
 
             $sql = "INSERT INTO usu_usuarios (usu_email, usu_senha, pes_id) VALUES (:email, :senha, :pes_id)";
             $stmt = $this->db->prepare($sql);
@@ -77,7 +75,7 @@ class ColaboradoresController extends ColaboradoresModel
             while ($linha = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $id = $linha['usu_id'];
             }
-            
+
             $sql = "INSERT INTO col_colaborador (col_status, usu_id, dep_id) VALUES (true, :usuid, 1)";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':usuid', $id);
@@ -99,12 +97,11 @@ class ColaboradoresController extends ColaboradoresModel
             $vars = ['i' => 'ida'];
             $ida = 0;
             $ids = array();
-            foreach ($linha as $id){
+            foreach ($linha as $id) {
                 $ids[${$vars['i']}] = $id;
-                //echo $ids[${$vars['i']}];
                 $ida++;
             }
-            
+
             $sql = "UPDATE usu_usuarios u, pes_pessoas p 
             SET u.usu_email = :email, p.pes_nome = :nome, p.pes_cpf = :cpf, p.pes_cep = :cep, p.pes_cidade = :cidade,
             p.pes_bairro = :bairro, p.pes_numero = :numero, p.pes_telefone = :telefone 
@@ -129,4 +126,16 @@ class ColaboradoresController extends ColaboradoresModel
             return "Erro ao atualizar o treinamento: " . $e->getMessage();
         }
     }
+
+    public function getTreinamentosByColaboradorId($colaboradorId)
+    {
+        $stmt = $this->db->prepare('SELECT t.tre_id, t.tre_titulo FROM tre_treinamento t INNER JOIN treinamentos_do_colaborador tc ON t.tre_id = tc.tre_id WHERE tc.col_id = :colaboradorId');
+        $stmt->bindParam(':colaboradorId', $colaboradorId);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+
+
 }
