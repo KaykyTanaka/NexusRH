@@ -182,7 +182,18 @@ if (isset($_POST['desTreinamento'])) {
                                             <td>
                                                 <div class="container text-center">
                                                     <div class="row">
-                                                        <div class="col-6">
+                                                        <div class="col-4">
+                                                            <button class="btn btn-primary btn-visualizar" data-toggle="modal"
+                                                                data-target="#visualizarTreinamento"
+                                                                data-id="<?php echo $treinamento['tre_id']; ?>"
+                                                                data-titulo="<?php echo $treinamento['tre_titulo']; ?>"
+                                                                data-descricao="<?php echo $treinamento['tre_descricao']; ?>"
+                                                                data-responsavel="<?php echo $treinamento['tre_responsavel']; ?>">
+                                                                <i class="fas fa-eye"></i>
+                                                            </button>
+                                                        </div>
+                                                        
+                                                        <div class="col-4">
                                                             <button class="btn btn-primary btn-editar" data-toggle="modal"
                                                                 data-target="#editarTreinamento"
                                                                 data-id="<?php echo $treinamento['tre_id']; ?>"
@@ -192,7 +203,8 @@ if (isset($_POST['desTreinamento'])) {
                                                                 <i class="fas fa-edit"></i>
                                                             </button>
                                                         </div>
-                                                        <div class="col-6">
+
+                                                        <div class="col-4">
                                                             <button type="submit" class="btn btn-danger btn-desativar mr-2"
                                                                 data-toggle="modal" data-target="#desativarTreinamento"
                                                                 data-id="<?php echo $treinamento['tre_id']; ?>"
@@ -238,6 +250,49 @@ if (isset($_POST['desTreinamento'])) {
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
+
+
+<!-- Modal de visualizar de Treinamento -->
+<div class="modal fade" id="visualizarTreinamento" tabindex="-1" role="dialog" aria-labelledby="visualizarTreinamentoLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header azul-nexus">
+                <h5 class="modal-title  text-light font-weight-bold" id="visualizarTreinamentoLabel">Treinamento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class ="fechar">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formVisualizarTreinamento" method="POST" class="font-weight-bold text-dark">
+                    <input type="hidden" id="viewTreinamentoId" name="viewTreinamentoId">
+                    <div class="form-group">
+                        <label for="viewTreTitulo">Título do Treinamento:</label>
+                        <input type="text" class="form-control" id="viewTreTitulo" name="viewTreTitulo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="viewTreDescricao">Descrição do Treinamento:</label>
+                        <textarea class="form-control" id="viewTreDescricao" name="viewTreDescricao" rows="3"
+                            required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="viewTreResponsavel">Responsável pelo Treinamento:</label>
+                        <input type="text" class="form-control" id="viewTreResponsavel" name="viewTreResponsavel"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="viewpesTreinamentos">Colaboradores:</label>
+                        <ul id="listaColaborador"></ul>
+                    </div>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <!-- Modal de Edição de Treinamento -->
 <div class="modal fade" id="editarTreinamento" tabindex="-1" role="dialog" aria-labelledby="editarTreinamentoLabel"
     aria-hidden="true">
@@ -306,6 +361,50 @@ if (isset($_POST['desTreinamento'])) {
 <!-- Page level custom scripts -->
 <script>
     $(document).ready(function () {
+
+
+        $('.btn-visualizar').click(function () {
+            // Recupera o ID do treinamento do botão clicado
+            var treId = $(this).data('id');
+            var treTitulo = $(this).data('titulo');
+            //var <?php echo 'z' ?> = $(this).data('titulo');
+            var treDescricao = $(this).data('descricao');
+            var treResponsavel = $(this).data('responsavel');
+
+            // Define os valores nos campos do formulário de edição
+            $('#viewTreinamentoId').val(treId);
+            $('#viewTreTitulo').val(treTitulo);
+            //$('#editTreTitulo').val(z);
+            $('#viewTreDescricao').val(treDescricao);
+            $('#viewTreResponsavel').val(treResponsavel);
+            // Chamada Ajax para recuperar os treinamentos do colaborador
+            $.ajax({
+                    url: '../Controller/TreinamentosController.php', // Substitua pelo caminho do seu arquivo PHP
+                    type: 'POST',
+                    data: { "treinamentoId": treId },
+
+                    success: function (response) {
+                        console.log(response); // Imprime a resposta no console para depuração
+                        $('#listaColaborador').empty();
+                        // Verifica se a resposta é um array
+                        if (Array.isArray(response)) {
+                            
+                            response.forEach(function (colaborador) {
+                                console.log(colaborador);
+                                $('#listaColaborador').append('<li>' + colaborador + '</li>');
+                            });
+                        }
+                    },
+                    error: function () {
+                        $('#listaColaborador').empty();
+                        //alert('Erro ao carregar os treinamentos do colaborador.');
+                        $('#listaColaborador').append('<li>Nenhum Colaborador encontrado.</li>');
+                    }
+            });
+        });
+
+
+
         // Evento de clique no botão de edição
         $('.btn-editar').click(function () {
             // Recupera o ID do treinamento do botão clicado
@@ -322,6 +421,7 @@ if (isset($_POST['desTreinamento'])) {
             $('#editTreDescricao').val(treDescricao);
             $('#editTreResponsavel').val(treResponsavel);
         });
+        
         $('.btn-desativar').click(function () {
             // Recupera o ID do treinamento do botão clicado
             var treId = $(this).data('id');

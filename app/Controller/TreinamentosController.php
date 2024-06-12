@@ -1,11 +1,32 @@
 <?php
 namespace App\Controller;
 
+
 use \App\Model\TreinamentosModel;
 use \PDO;
 use \PDOException;
 
-class TreinamentosController extends TreinamentosModel
+
+if(isset($_POST["treinamentoId"])){    
+    header("Content-type: application/json; charset=utf-8");
+    $retornocoltreinos = (new TreinamentosController())->getTreinamentosByColaboradorId($_POST["treinamentoId"]);
+    $i=0;
+    $col_nomes = array();
+    foreach($retornocoltreinos as $retorno){
+        foreach($retorno as $pes_nome){
+            if($retorno["pes_nome"] == $pes_nome){
+                $col_nomes[$i] = $pes_nome;
+                //echo $col_nomes[$i];
+                $i++;
+            }
+        }
+    } 
+    if(sizeof($col_nomes) > 0) {
+        echo json_encode($col_nomes);
+    }
+}
+
+class TreinamentosController
 {
     private $db;
 
@@ -86,4 +107,19 @@ class TreinamentosController extends TreinamentosModel
             return "Erro ao atualizar o treinamento: " . $e->getMessage();
         }
     }
+
+
+
+    public function getTreinamentosByColaboradorId($colaboradorId)
+    {
+        $stmt = $this->db->prepare('select p.pes_nome from treinamentos_do_colaborador tc
+        inner join tre_treinamento t using (tre_id)
+        inner join col_colaborador c using (col_id)
+        inner join usu_usuarios using (usu_id)
+        inner join pes_pessoas p using (pes_id) WHERE tc.col_id = :colaboradorId');
+        $stmt->bindParam(':colaboradorId', $colaboradorId);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
+

@@ -564,7 +564,7 @@ if (isset($_POST['desColaborador'])) {
                     },
                     error: function () {
                         $('#listaTreinamentos').empty();
-                        alert('Erro ao carregar os treinamentos do colaborador.');
+                        //alert('Erro ao carregar os treinamentos do colaborador.');
                         $('#listaTreinamentos').append('<li>Nenhum treinamento encontrado.</li>');
                     }
                 });

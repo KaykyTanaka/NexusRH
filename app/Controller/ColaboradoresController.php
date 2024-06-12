@@ -23,6 +23,9 @@ if(isset($_POST["colaboradorId"])){
         echo json_encode($tre_nomes);
     }
 }
+
+
+
 class ColaboradoresController
 {
 
