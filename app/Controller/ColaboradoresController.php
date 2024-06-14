@@ -62,8 +62,32 @@ class ColaboradoresController
         return $stmt->execute();
     }
 
+    public function inserirVerificador($pesNome, $pesCPF, $pesCEP, $pesCidade, $pesBairro, $pesNumero, $pesTelefone, $usuEmail, $usuSenha){
+        $sql = "INSERT INTO usu_usuarios (usu_email, usu_senha, pes_id) VALUES (:email, :senha, 1)";
+        $stmt = $this->db->prepare($sql);
+        $senhaCriptografada = hash('sha512', $usuSenha);
+        //$stmt->bindParam(':email', $usuEmail);
+        //$stmt->bindParam(':senha', $senhaCriptografada);
+        try{        
+            $retorn = $stmt->execute(array('email' => $usuEmail, 'senha' => $senhaCriptografada));
+            if($retorn == false){
+                throw new PDOException("Exceção PDO, Valor único", 1062);
+            }
+            self::inserirColaborador($pesNome, $pesCPF, $pesCEP, $pesCidade, $pesBairro, $pesNumero, $pesTelefone, $usuEmail, $usuSenha);
+            
+            return "test";
+        }catch  (PDOException $e) {
+            //echo "Erro ao inserir o treinamento: " . $e->getMessage();
+            if($e->getCode() == 1062){
+                //return "Erro ao atualizar o treinamento: " . $e->getMessage();
+                return $e;
+            }
+        }
+    }
+
     public function inserirColaborador($pesNome, $pesCPF, $pesCEP, $pesCidade, $pesBairro, $pesNumero, $pesTelefone, $usuEmail, $usuSenha)
     {
+
         try {
             $sql = "INSERT INTO pes_pessoas
             (pes_nome, pes_cpf, pes_cep, pes_cidade, pes_bairro, pes_numero, pes_telefone) 

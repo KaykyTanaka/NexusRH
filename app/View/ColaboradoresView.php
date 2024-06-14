@@ -54,7 +54,7 @@ if (isset($_POST['enviar'])) {
     $usuEmail = $_POST['usuEmail'];
     $usuSenha = $_POST['usuSenha'];
 
-    $var = (new ColaboradoresController)->inserirColaborador(
+    $var = (new ColaboradoresController)->inserirVerificador(
         $pesNome,
         $pesCPF,
         $pesCEP,
@@ -65,8 +65,12 @@ if (isset($_POST['enviar'])) {
         $usuEmail,
         $usuSenha
     );
+    $_SESSION['varInserCol'] = $var;
     header('Location:' . basename(__FILE__));
+    goto b;
 }
+
+
 if (isset($_POST['salvarColaborador'])) {
     $colID = $_POST['editColaboradorId'];
     $usuEmail = $_POST['editusuEmail'];
@@ -100,6 +104,7 @@ if (isset($_POST['desColaborador'])) {
     $varErro = $desativarColaborador->disableColaborador($colID);
     header('Location:' . basename(__FILE__));
 }
+$_POST = array();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -626,7 +631,21 @@ if (isset($_POST['desColaborador'])) {
             });
         });
     </script>
+    <?php 
+    if(isset($_SESSION['varInserCol']) && $_SESSION['varInserCol'] instanceof \PDOException){
+        echo
+        '<script>
+            Swal.fire({
+                title: "Erro!",
+                text: "'.$_SESSION['varInserCol']->getMessage().'",
+                icon: "error"
+                //showConfirmButton: false
+            })
+        </script>';
+        //echo "Erro ao atualizar o treinamento: " . $_SESSION['varInserCol']->getMessage();
+        unset($_SESSION['varInserCol']);
+    }
+    b:;
+    ?>
 </body>
-
 </html>
-<?php $_POST = array(); ?>
