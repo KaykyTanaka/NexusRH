@@ -15,6 +15,7 @@ if (isset($_SESSION['usuario'])) {
     if ($banco->getUsuario()[2] == "colaborador") {
         ?>
         <script>
+            document.getElementById("wrapper").style.display = 'none';
             window.onload = function () {
                 Swal.fire({
                     title: "Acesso Não Permitido!",
@@ -96,6 +97,7 @@ if (isset($_POST['salvarColaborador'])) {
     );
     echo $var;
     header('Location:' . basename(__FILE__));
+    goto b;
 }
 
 $desativarColaborador = new ColaboradoresController();
@@ -103,6 +105,7 @@ if (isset($_POST['desColaborador'])) {
     $colID = $_POST['desColaborador'];
     $varErro = $desativarColaborador->disableColaborador($colID);
     header('Location:' . basename(__FILE__));
+    goto b;
 }
 $_POST = array();
 ?>

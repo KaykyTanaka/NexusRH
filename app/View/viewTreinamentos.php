@@ -83,7 +83,7 @@ if (isset($_POST['desTreinamento'])) {
     <link rel="stylesheet" href="css/estiloNexus.css">
     <link href="vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
+    <link href="css/estiloNexus.css" rel="stylesheet">
 </head>
 <!-- Page Wrapper -->
 <div id="wrapper">
@@ -360,6 +360,7 @@ if (isset($_POST['desTreinamento'])) {
 <script src="https://cdn.datatables.net/plug-ins/1.11.5/sorting/natural.js"></script>
 <!-- Page level custom scripts -->
 <script>
+   
     $(document).ready(function () {
 
 
@@ -425,7 +426,6 @@ if (isset($_POST['desTreinamento'])) {
         $('.btn-desativar').click(function () {
             // Recupera o ID do treinamento do botão clicado
             var treId = $(this).data('id');
-
             //$('#desTreinamento').val(treId);
             Swal.fire({
                 title: "Tem certeza?",
@@ -435,7 +435,7 @@ if (isset($_POST['desTreinamento'])) {
                 confirmButtonColor: "#3085d6",
                 denyButtonColor: "#d33",
                 confirmButtonText: "Deletar",
-                denyButtonText: "Cancelar"
+                denyButtonText: "Cancelar",
             }).then((result) => {
                 if (result.isConfirmed) {
                     Swal.fire({

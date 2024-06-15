@@ -20,6 +20,7 @@ if (isset($_SESSION['usuario'])) {
     if ($banco->getUsuario()[2] == "administrador") {
         ?>
         <script>
+            document.getElementById("wrapper").style.display = 'none';
             window.onload = function () {
                 Swal.fire({
                     title: "Acesso Não Permitido!",

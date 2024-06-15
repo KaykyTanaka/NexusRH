@@ -16,6 +16,7 @@ if(isset($_SESSION['usuario'])){
         ?>
 <script>
 window.onload = function() {
+    document.getElementById("wrapper").style.display = 'none';
     Swal.fire({
         title: "Acesso Não Permitido!",
         text: "Apenas administradores podem acessar está pagina, encerrando sessão.",
@@ -71,7 +72,7 @@ if (isset($_POST['linkar'])) {
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="vendor/SweetAlert2/sweetalert2.min.css" rel="stylesheet">
-
+    <link href="css/estiloNexus.css" rel="stylesheet">
 
 </head>
 

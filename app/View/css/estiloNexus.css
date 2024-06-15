@@ -21,3 +21,13 @@
 .fechar{
     color:white;
 }
+
+body {
+    transition: all 1s ease;
+  }
+  
+  body.swal2-shown{
+    -webkit-filter: blur(6px);
+    opacity: 0.9;
+  }
+  

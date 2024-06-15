@@ -67,7 +67,7 @@ class Renders
                     </a>
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="PerfilColaboradorView.php">
                             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                             Perfil
                         </a>
@@ -119,16 +119,13 @@ class Renders
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Treinamentos</span></a>
             </li>
+            <?php if ($tipo == "administrador"): ?>
             <li class="nav-item">
-                <?php if ($tipo == "colaborador"): ?>
-                    <a class="nav-link" href="PerfilView.php">
-                        <i class="fas fa-fw fa-user"></i><span>Perfil</span></a>
-                <?php elseif ($tipo == "administrador"): ?>
                     <a class="nav-link" href="ColaboradoresView.php">
                         <i class="fas fa-fw fa-user"></i><span>Usuários</span>
                     </a>
-                <?php endif; ?>
             </li>
+            <?php endif; ?>
             <?php if ($tipo == "administrador"): ?>
             <li class="nav-item">
                 <a class="nav-link" href="TreinoColaboradores.php">
