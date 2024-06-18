@@ -128,11 +128,20 @@ class Renders
             <?php endif; ?>
             <?php if ($tipo == "administrador"): ?>
             <li class="nav-item">
+                <a class="nav-link" href="DepartamentosView.php">
+                    <i class="fas fa-fw fa-users"></i><span>Departamentos</span>
+                </a>
+            </li>
+            <?php endif; ?>
+
+            <?php if ($tipo == "administrador"): ?>
+            <li class="nav-item">
                 <a class="nav-link" href="TreinoColaboradores.php">
                     <i class="fas fa-fw fa-user"></i><span>Treinamento/Colaboradores</span>
                 </a>
             </li>
             <?php endif; ?>
+
 
 
             <div class="text-center d-none d-md-inline">
