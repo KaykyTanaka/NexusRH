@@ -58,8 +58,7 @@ if (isset($_POST['desTreinamento'])) {
 
 ?>
 <!DOCTYPE html>
-< lang="pt-br">
-
+<lang="pt-br">
     <head>
 
         <meta charset="utf-8">
