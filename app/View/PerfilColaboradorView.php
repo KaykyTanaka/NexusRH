@@ -11,8 +11,29 @@ $banco = new LoginController;
 //var_dump($banco->getUsuario());
 //var_dump($banco->getUsuario()[0]);
 //var_dump($banco->chamarTipo());
-if (!isset($_SESSION['usuario'])) {
-    //Alterar!!
+if(isset($_SESSION['usuario'])){
+    if($banco->getUsuario()[2] == "administrador"){
+        ?>
+<script>
+window.onload = function() {
+    document.getElementById("wrapper").style.display = 'none';
+    Swal.fire({
+        title: "Acesso Não Permitido!",
+        text: "Apenas administradores podem acessar está pagina, encerrando sessão.",
+        icon: "error",
+        //timer: 2000,
+        showConfirmButton: true
+    }).then(function() {
+        <?php $banco->destroy_sessoes(); ?>
+        window.location = '<?php echo dirname($_SERVER["PHP_SELF"])?>/LoginView.php';
+    })
+};
+</script>
+<?php
+    }
+}else{
+    $banco->destroy_sessoes();
+    header('Location: LoginView.php');
 }
 if (isset($_POST['sair'])) {
     $banco->destroy_sessoes();
@@ -65,7 +86,7 @@ $treinamentos = $controllerTreinamentos->getColabTreinamentos($banco->getID());
                 <div id="content">
 
                     <!-- Topbar -->
-                    <?php Renders::renderNavbar($banco->getUsuario()[0]) ?>
+                    <?php Renders::renderNavbar($banco->getUsuario()[0], $banco->chamarTipo()); ?>
                     <!-- End of Topbar -->
 
                     <!-- Begin Page Content -->
@@ -86,12 +107,12 @@ $treinamentos = $controllerTreinamentos->getColabTreinamentos($banco->getID());
                                                 <img src="img/colaborador.png"
                                                     alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
                                                 <h5 class="my-3"><?php echo $dados['pes_nome'] ?></h5>
-                                                <p class="text-muted mb-1">Recursos Humanos</p>
+                                                <?php if($banco->chamarTipo() == "colaborador") : echo $dados['dep_nome']  ?> <p class="text-muted mb-1"></p> <?php endif; ?>
                                                 <p class="text-muted mb-4"><?php echo $dados['pes_cidade'] .  ", " 
                                                 . $dados['pes_bairro'] . ", " ?>BR</p>                                     
                                             </div>
                                         </div>
-                                        <div class="card mb-4 mb-lg-0">
+                                        <!-- <div class="card mb-4 mb-lg-0">
                                             <div class="card-body p-0">
                                                 <ul class="list-group list-group-flush rounded-3">
                                                     <li
@@ -121,7 +142,7 @@ $treinamentos = $controllerTreinamentos->getColabTreinamentos($banco->getID());
                                                     </li>
                                                 </ul>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="col-lg-8">
                                         <div class="card mb-4">

@@ -1,33 +1,29 @@
-.modalzinha{
-    font-weight: bold;
+.modalzinha {
+  font-weight: bold;
 }
 .azul-nexus {
-    /* fallback for old browsers */
-    background: #003554;
+  background: #003554;
 }
-.azul-claro{
-    background: #006494;
+.azul-claro {
+  background: #006494;
 }
-.gradiente-nexus{
-    /* fallback for old browsers */
-    background: #003554;
+.gradiente-nexus {
+  background: #003554;
 
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to top, #003554, #003554, #006494);
+  background: -webkit-linear-gradient(to top, #003554, #003554, #006494);
 
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to top, #003554, #003554, #006494);
+  background: linear-gradient(to top, #003554, #003554, #006494);
 }
-.fechar{
-    color:white;
+.fechar {
+  color: white;
 }
 
 body {
-    transition: all 1s ease;
-  }
-  
-  body.swal2-shown{
-    -webkit-filter: blur(6px);
-    opacity: 0.9;
-  }
-  
+  transition: all 1s ease;
+}
+
+.opc-blur {
+  -webkit-filter: blur(10px);
+  opacity: 0.9;
+  background-color: yellow;
+}

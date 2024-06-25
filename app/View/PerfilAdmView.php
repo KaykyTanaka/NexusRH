@@ -57,7 +57,7 @@ if (isset($_POST['sair'])) {
                 <div id="content">
 
                     <!-- Topbar -->
-                    <?php Renders::renderNavbar($banco->getUsuario()[0]) ?>
+                    <?php Renders::renderNavbar($banco->getUsuario()[0], $banco->chamarTipo()); ?>
                     <!-- End of Topbar -->
 
                     <!-- Begin Page Content -->

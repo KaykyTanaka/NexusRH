@@ -79,7 +79,7 @@ if (isset($_POST['linkar'])) {
 <body id="page-top">
 
     <!-- Page Wrapper -->
-    <div id="wrapper">
+    <div id="wrapper" class="opc-blur">
 
         <!-- Sidebar -->
         <?php Renders::renderSidebar($banco->chamarTipo()); ?>
@@ -92,7 +92,7 @@ if (isset($_POST['linkar'])) {
             <div id="content">
 
                 <!-- Topbar -->
-                <?php Renders::renderNavbar($banco->getUsuario()[0]) ?>
+                <?php Renders::renderNavbar($banco->getUsuario()[0], $banco->chamarTipo()); ?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->

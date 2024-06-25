@@ -68,7 +68,6 @@ $departamentos = $NovoDepartamento->visualizarDepartamentos();
 
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
     <!-- Custom styles for this page -->
     <link rel="stylesheet" href="css/estiloNexus.css">
     <link href="vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
@@ -88,7 +87,7 @@ $departamentos = $NovoDepartamento->visualizarDepartamentos();
             <div id="content">
 
                 <!-- Topbar -->
-                <?php Renders::renderNavbar($banco->getUsuario()[0]) ?>
+                <?php Renders::renderNavbar($banco->getUsuario()[0], $banco->chamarTipo()); ?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->

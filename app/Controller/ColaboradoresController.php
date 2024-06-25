@@ -74,8 +74,6 @@ class ColaboradoresController
                 throw new PDOException("Exceção PDO, Valor único", 1062);
             }
             self::inserirColaborador($pesNome, $pesCPF, $pesCEP, $pesCidade, $pesBairro, $pesNumero, $pesTelefone, $usuEmail, $usuSenha);
-            
-            return "test";
         }catch  (PDOException $e) {
             //echo "Erro ao inserir o treinamento: " . $e->getMessage();
             if($e->getCode() == 1062){
