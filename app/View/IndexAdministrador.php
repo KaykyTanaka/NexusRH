@@ -47,6 +47,7 @@ $totalDepartamentos = $dashboard->getTotalDepartamentos();
         </script>
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/indexAdmin.css">
 
 </head>
 
@@ -87,19 +88,39 @@ $totalDepartamentos = $dashboard->getTotalDepartamentos();
 
                         <!-- Visão Geral dos Colaboradores -->
                         <div class="panel-section">
-                            <h2>Visão Geral dos Colaboradores</h2>
                             <div class="row">
-                                <div class="col-md-3 panel-card">
+                                <div class="col-md-4 panel-card mb-3">
                                     <div class="card">
                                         <div class="card-body">
                                             <h5 class="card-title">Total de Colaboradores</h5>
+
                                             <p class="card-text" id="totalColaboradores">
                                                 <?php echo $totalColaboradores; ?>
                                             </p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3 panel-card">
+                                <div class="col-md-4 panel-card mb-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Colaboradores sem Treinamento</h5>
+                                            <p class="card-text" id="colaboradoresSemTreinamento">
+                                                <?php echo $colaboradoresSemTreinamento; ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 panel-card mb-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Total de Departamentos</h5>
+                                            <p class="card-text" id="totalDepartamentos">
+                                                <?php echo $totalDepartamentos; ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 panel-card">
                                     <div class="card">
                                         <div class="card-body">
                                             <h5 class="card-title">Colaboradores por Departamento</h5>
@@ -112,14 +133,8 @@ $totalDepartamentos = $dashboard->getTotalDepartamentos();
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <!-- Treinamentos -->
-                        <div class="panel-section">
-                            <h2></h2>
-                            <div class="row">
-                                <div class="col-md-4 panel-card">
+                                <div class="col-md-6 panel-card">
                                     <div class="card">
                                         <div class="card-body">
                                             <h5 class="card-title">Treinamento com Mais Colaboradores</h5>
@@ -129,27 +144,6 @@ $totalDepartamentos = $dashboard->getTotalDepartamentos();
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4 panel-card">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Colaboradores sem Treinamento</h5>
-                                            <p class="card-text" id="colaboradoresSemTreinamento">
-                                                <?php echo $colaboradoresSemTreinamento; ?>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4 panel-card">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Total de Departamentos</h5>
-                                            <p class="card-text" id="totalDepartamentos">
-                                                <?php echo $totalDepartamentos; ?></p>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
 
 
