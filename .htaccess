@@ -1,2 +1,11 @@
-RewriteEngine On
-ErrorDocument 404 /index.php
+<IfModule mod_rewrite.c>
+
+    RewriteEngine On
+    Options +FollowSymLinks
+    
+    ErrorDocument 404 http://localhost/NexusRH/index.php
+    
+    RewriteRule ^home$ index.php?c=home&m=main [L]
+    RewriteRule ^about$ index.php?c=home&m=about [L]
+
+</IfModule>
