@@ -3,16 +3,29 @@ namespace App\View;
 
 require dirname(__DIR__, 2) . '/vendor/autoload.php';
 use \App\Controller\LoginController;
+use \App\Controller\Dashboard;
 use \App\Controller\Renders;
+
+date_default_timezone_set('America/Sao_Paulo');
+
 
 $banco = new LoginController;
 //var_dump($banco->getUsuario());
 //var_dump($banco->chamarTipo());
-header('Location: viewTreinamentos.php'); //Alterar!!
+
 if (isset($_POST['sair'])) {
     $banco->destroy_sessoes();
     header('Location: LoginView.php');
 }
+
+$dashboard = new Dashboard();
+
+// Dados para o painel
+$totalColaboradores = $dashboard->getTotalColaboradores();
+$colaboradoresSemTreinamento = $dashboard->getColaboradoresSemTreinamento();
+$treinamentoMaisColaboradores = $dashboard->getTreinamentoMaisColaboradores();
+$colaboradoresPorDepartamento = $dashboard->getColaboradoresPorDepartamento();
+$totalDepartamentos = $dashboard->getTotalDepartamentos();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -25,7 +38,7 @@ if (isset($_POST['sair'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>NS - Página Principal</title>
+    <title>NS - Painel</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -61,11 +74,94 @@ if (isset($_POST['sair'])) {
 
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Treinamentos</h1>
-                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                    class="fas fa-plus fa-sm text-white-50"></i>Treinamento</a>
+                            <h1 class="h3 mb-0 text-gray-800">Painel</h1>
+                            <p class="text-muted">Última atualização: <span
+                                    id="lastUpdate"><?php echo date('d/m/Y H:i:s'); ?></span></p>
+                        </div>
+
+
+
+
+
+
+
+                        <!-- Visão Geral dos Colaboradores -->
+                        <div class="panel-section">
+                            <h2>Visão Geral dos Colaboradores</h2>
+                            <div class="row">
+                                <div class="col-md-3 panel-card">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Total de Colaboradores</h5>
+                                            <p class="card-text" id="totalColaboradores">
+                                                <?php echo $totalColaboradores; ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 panel-card">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Colaboradores por Departamento</h5>
+                                            <ul id="colaboradoresPorDepartamento">
+                                                <?php foreach ($colaboradoresPorDepartamento as $departamento): ?>
+                                                    <li><?php echo $departamento['dep_nome'] . ': ' . $departamento['total']; ?>
+                                                    </li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Treinamentos -->
+                        <div class="panel-section">
+                            <h2></h2>
+                            <div class="row">
+                                <div class="col-md-4 panel-card">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Treinamento com Mais Colaboradores</h5>
+                                            <p class="card-text" id="treinamentoMaisColaboradores">
+                                                <?php echo $treinamentoMaisColaboradores['tre_titulo'] . ': ' . $treinamentoMaisColaboradores['total']; ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 panel-card">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Colaboradores sem Treinamento</h5>
+                                            <p class="card-text" id="colaboradoresSemTreinamento">
+                                                <?php echo $colaboradoresSemTreinamento; ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 panel-card">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Total de Departamentos</h5>
+                                            <p class="card-text" id="totalDepartamentos">
+                                                <?php echo $totalDepartamentos; ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <!-- Status de Treinamento e Certificação -->
 
                         </div>
+
+
+
+
+
+
 
                     </div>
                     <!-- /.container-fluid -->
