@@ -297,8 +297,8 @@ $_POST = array();
                                                 <td>
                                                     <div class="container text-center">
                                                         <div class="row">
-                                                            <div class="col-3 m-1">
-                                                                <button class="btn btn-primary btn-visualizar"
+                                                            <div class="col-4">
+                                                                <button class="btn btn-info btn-visualizar"
                                                                     data-toggle="modal" data-target="#visualizarColaborador"
                                                                     data-id="<?php echo $colaborador['col_id']; ?>"
                                                                     data-email="<?php echo $colaborador['usu_email']; ?>"
@@ -313,8 +313,8 @@ $_POST = array();
                                                                 </button>
                                                             </div>
 
-                                                            <div class="col-3 m-1">
-                                                                <button class="btn btn-primary btn-editar"
+                                                            <div class="col-4">
+                                                                <button class="btn btn-warning btn-editar"
                                                                     data-toggle="modal" data-target="#editarColaborador"
                                                                     data-id="<?php echo $colaborador['col_id']; ?>"
                                                                     data-email="<?php echo $colaborador['usu_email']; ?>"
@@ -329,7 +329,7 @@ $_POST = array();
                                                                 </button>
                                                             </div>
 
-                                                            <div class="col-3 m-1">
+                                                            <div class="col-4">
                                                                 <button type="submit"
                                                                     class="btn btn-danger btn-desativar ml-2 mr-5"
                                                                     data-toggle="modal" data-target="#desativarColaborador"

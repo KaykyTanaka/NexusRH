@@ -79,7 +79,7 @@ if (isset($_POST['linkar'])) {
 <body id="page-top">
 
     <!-- Page Wrapper -->
-    <div id="wrapper" class="opc-blur">
+    <div id="wrapper">
 
         <!-- Sidebar -->
         <?php Renders::renderSidebar($banco->chamarTipo()); ?>

@@ -22,8 +22,14 @@ body {
   transition: all 1s ease;
 }
 
-.opc-blur {
+/* .opc-blur {
   -webkit-filter: blur(10px);
   opacity: 0.9;
   background-color: yellow;
+} */
+
+.table td.fit,
+.table th.fit{
+  white-space: nowarp;
+  width: 1%;
 }

@@ -69,10 +69,8 @@ $departamentos = $NovoDepartamento->visualizarDepartamentos();
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <!-- Custom styles for this page -->
-    <link rel="stylesheet" href="css/estiloNexus.css">
     <link href="vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link href="css/estiloNexus.css" rel="stylesheet">
 </head>
 
 <body>
@@ -160,20 +158,20 @@ $departamentos = $NovoDepartamento->visualizarDepartamentos();
                                                         <tr>
                                                             <td><?php echo $departamento['dep_id']; ?></td>
                                                             <td><?php echo $departamento['dep_nome']; ?></td>
-                                                            <td>
+                                                            <td style="width: 30%; white-space:nowrap;">
                                                                 <div class="container text-center">
                                                                     <div class="row">
-                                                                        <div class="col-4">
+                                                                        <!-- <div class="col-4">
                                                                             <button class="btn btn-primary btn-visualizar"
                                                                                 data-toggle="modal"
                                                                                 data-target="#visualizarDepartamento"
-                                                                                data-id="<?php echo $departamento['dep_id']; ?>"
-                                                                                data-nome="<?php echo $departamento['dep_nome']; ?>">
+                                                                                data-id="</?php echo $departamento['dep_id']; ?>"
+                                                                                data-nome="</?php echo $departamento['dep_nome']; ?>">
                                                                                 <i class="fas fa-eye"></i>
                                                                             </button>
-                                                                        </div>
+                                                                        </div> -->
                                                                         <div class="col-4">
-                                                                            <button class="btn btn-primary btn-editar"
+                                                                            <button class="btn btn-warning btn-editar"
                                                                                 data-toggle="modal"
                                                                                 data-target="#editarDepartamento"
                                                                                 data-id="<?php echo $departamento['dep_id']; ?>"
@@ -181,6 +179,7 @@ $departamentos = $NovoDepartamento->visualizarDepartamentos();
                                                                                 <i class="fas fa-edit"></i>
                                                                             </button>
                                                                         </div>
+                                                                        <div class="col-4"></div>
                                                                         <div class="col-4">
                                                                             <button type="button"
                                                                                 class="btn btn-danger btn-desativar"
@@ -344,12 +343,12 @@ $departamentos = $NovoDepartamento->visualizarDepartamentos();
                     modal.find('#editDepNome').val(nome);
                 });
 
-                $('#visualizarDepartamento').on('show.bs.modal', function (event) {
-                    var button = $(event.relatedTarget);
-                    var nome = button.data('nome');
-                    var modal = $(this);
-                    modal.find('#viewDepNome').val(nome);
-                });
+                // $('#visualizarDepartamento').on('show.bs.modal', function (event) {
+                //     var button = $(event.relatedTarget);
+                //     var nome = button.data('nome');
+                //     var modal = $(this);
+                //     modal.find('#viewDepNome').val(nome);
+                // });
 
                 $('#desativarDepartamento').on('show.bs.modal', function (event) {
                     var button = $(event.relatedTarget);

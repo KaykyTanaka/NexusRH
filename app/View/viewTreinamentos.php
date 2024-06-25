@@ -47,6 +47,8 @@ if (isset($_POST['editarTreinamento'])) {
     header('Location:' . basename(__FILE__));
 }
 
+
+
 $desativarTreinamento = new TreinamentosController;
 if (isset($_POST['desTreinamento'])) {
     $treId = $_POST['desTreinamento'];
@@ -175,7 +177,6 @@ if (isset($_POST['desTreinamento'])) {
                                         <tbody>
                                             <?php foreach ($treinamentos as $treinamento): ?>
                                                 <tr>
-
                                                     <td><?php echo $treinamento['tre_id']; ?></td>
                                                     <td><?php echo $treinamento['tre_titulo']; ?></td>
                                                     <td><?php echo $treinamento['tre_descricao']; ?></td>
@@ -184,7 +185,7 @@ if (isset($_POST['desTreinamento'])) {
                                                         <div class="container text-center">
                                                             <div class="row">
                                                                 <div class="col-4">
-                                                                    <button class="btn btn-primary btn-visualizar"
+                                                                    <button class="btn btn-info btn-visualizar"
                                                                         data-toggle="modal"
                                                                         data-target="#visualizarTreinamento"
                                                                         data-id="<?php echo $treinamento['tre_id']; ?>"
@@ -194,9 +195,8 @@ if (isset($_POST['desTreinamento'])) {
                                                                         <i class="fas fa-eye"></i>
                                                                     </button>
                                                                 </div>
-
                                                                 <div class="col-4">
-                                                                    <button class="btn btn-primary btn-editar"
+                                                                    <button class="btn btn-warning btn-editar"
                                                                         data-toggle="modal" data-target="#editarTreinamento"
                                                                         data-id="<?php echo $treinamento['tre_id']; ?>"
                                                                         data-titulo="<?php echo $treinamento['tre_titulo']; ?>"
@@ -215,6 +215,15 @@ if (isset($_POST['desTreinamento'])) {
                                                                         name="desativar">
                                                                         <i class="fas fa-ban"></i>
                                                                     </button>
+                                                                </div>
+                                                                <div class="col-3"></div>
+                                                                <div class="col-1">
+                                                                    <a href="TreinamentoReport.php?<?php echo "idTreinamento=" . $treinamento['tre_id'];?>"
+                                                                     target="_blank"
+                                                                        class="btn btn-secondary btn-relatorio mt-2"
+                                                                        name="relatorio">
+                                                                        Relátorio
+                                                                    </a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -368,66 +377,115 @@ if (isset($_POST['desTreinamento'])) {
         <script src="https://cdn.datatables.net/plug-ins/1.11.5/sorting/natural.js"></script>
         <!-- Page level custom scripts -->
         <script>
-            $(document).ready(function () {
-                // Evento de clique no botão de edição
-                $('.btn-editar').click(function () {
-                    // Recupera o ID do treinamento do botão clicado
-                    var treId = $(this).data('id');
-                    var treTitulo = $(this).data('titulo');
-                    //var <?php echo 'z' ?> = $(this).data('titulo');
-                    var treDescricao = $(this).data('descricao');
-                    var treResponsavel = $(this).data('responsavel');
-
-                    // Define os valores nos campos do formulário de edição
-                    $('#editTreinamentoId').val(treId);
-                    $('#editTreTitulo').val(treTitulo);
-                    //$('#editTreTitulo').val(z);
-                    $('#editTreDescricao').val(treDescricao);
-                    $('#editTreResponsavel').val(treResponsavel);
-                });
-
-                $('.btn-desativar').click(function () {
-                    // Recupera o ID do treinamento do botão clicado
-                    var treId = $(this).data('id');
-                    //$('#desTreinamento').val(treId);
-                    Swal.fire({
-                        title: "Tem certeza?",
-                        text: "Você não conseguira reverter isto!",
-                        icon: "warning",
-                        showDenyButton: true,
-                        confirmButtonColor: "#3085d6",
-                        denyButtonColor: "#d33",
-                        confirmButtonText: "Deletar",
-                        denyButtonText: "Cancelar",
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.fire({
-                                title: "Deletado!",
-                                text: "O usuário foi deletado com sucesso, redirecionando em 2 segundos.",
-                                icon: "success",
-                                timer: 2000
-                                //showConfirmButton: false
-                            }).then(function () {
-                                document.getElementById("desTreinamento").value = treId;
-                                document.forms["formdesativarTreinamento"].submit();
-                            });
-                            //document.formdesativarTreinamento.desTreinamento.value = treId;
-                        } else if (result.isDenied) {
-                            Swal.fire({
-                                title: 'Cancelado.',
-                                text: 'As mudanças não foram feitas',
-                                icon: 'info',
-                                timer: 3000
-                            }).then(function () {
-                                location.reload()
+        $(document).ready(function () {
+            // Evento de clique no botão de edição
+            $('.btn-visualizar').click(function () {
+            // Recupera o ID do treinamento do botão clicado
+            var treId = $(this).data('id');
+            var treTitulo = $(this).data('titulo');
+            //var <?php echo 'z' ?> = $(this).data('titulo');
+            var treDescricao = $(this).data('descricao');
+            var treResponsavel = $(this).data('responsavel');
+            // Define os valores nos campos do formulário de edição
+            $('#viewTreinamentoId').val(treId);
+            $('#viewTreTitulo').val(treTitulo);
+            //$('#editTreTitulo').val(z);
+            $('#viewTreDescricao').val(treDescricao);
+            $('#viewTreResponsavel').val(treResponsavel);
+            // Chamada Ajax para recuperar os treinamentos do colaborador
+                $.ajax({
+                    url: '../Controller/TreinamentosController.php', // Substitua pelo caminho do seu arquivo PHP
+                    type: 'POST',
+                    data: { "treinamentoId": treId },
+                    success: function (response) {
+                        console.log(response); // Imprime a resposta no console para depuração
+                        $('#listaColaborador').empty();
+                        // Verifica se a resposta é um array
+                        if (Array.isArray(response)) {
+                            response.forEach(function (colaborador) {
+                                console.log(colaborador);
+                                $('#listaColaborador').append('<li>' + colaborador + '</li>');
                             });
                         }
-                    });
+                    },
+                    error: function () {
+                        $('#listaColaborador').empty();
+                        //alert('Erro ao carregar os treinamentos do colaborador.');
+                        $('#listaColaborador').append('<li>Nenhum Colaborador encontrado.</li>');
+                    }
+                });
+            }); 
 
+                
+            $('.btn-editar').click(function () {
+                // Recupera o ID do treinamento do botão clicado
+                var treId = $(this).data('id');
+                var treTitulo = $(this).data('titulo');
+                //var <?php echo 'z' ?> = $(this).data('titulo');
+                var treDescricao = $(this).data('descricao');
+                var treResponsavel = $(this).data('responsavel');
+                // Define os valores nos campos do formulário de edição
+                $('#editTreinamentoId').val(treId);
+                $('#editTreTitulo').val(treTitulo);
+                //$('#editTreTitulo').val(z);
+                $('#editTreDescricao').val(treDescricao);
+                $('#editTreResponsavel').val(treResponsavel);
+            });
+            $('.btn-desativar').click(function () {
+                // Recupera o ID do treinamento do botão clicado
+                var treId = $(this).data('id');
+                //$('#desTreinamento').val(treId);
+                Swal.fire({
+                    title: "Tem certeza?",
+                    text: "Você não conseguira reverter isto!",
+                    icon: "warning",
+                    showDenyButton: true,
+                    confirmButtonColor: "#3085d6",
+                    denyButtonColor: "#d33",
+                    confirmButtonText: "Deletar",
+                    denyButtonText: "Cancelar",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: "Deletado!",
+                            text: "O usuário foi deletado com sucesso, redirecionando em 2 segundos.",
+                            icon: "success",
+                            timer: 2000
+                            //showConfirmButton: false
+                        }).then(function () {
+                            document.getElementById("desTreinamento").value = treId;
+                            document.forms["formdesativarTreinamento"].submit();
+                        });
+                        //document.formdesativarTreinamento.desTreinamento.value = treId;
+                    } else if (result.isDenied) {
+                        Swal.fire({
+                            title: 'Cancelado.',
+                            text: 'As mudanças não foram feitas',
+                            icon: 'info',
+                            timer: 3000
+                        }).then(function () {
+                            location.reload()
+                        });
+                    }
                 });
             });
+        });
         </script>
-
+        <?php
+        //if (isset($_POST['relatorio'])) {
+            // echo "
+            //     <script>
+            //         $(document).ready(function(){
+            //             window.open(url, \"_blank\"); // will open new tab on document ready
+            //         });
+            //         setTimeout( 10000); 
+            //     </script>";
+            // echo '<script>window.open("http://www.google.com/");</script>';
+            //unset($_POST['relatorio']);
+            //sleep(3);
+            //header('Location:' . basename(__FILE__));
+        //}
+        ?>
 
     </body>
 

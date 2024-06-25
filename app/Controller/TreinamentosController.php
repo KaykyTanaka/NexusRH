@@ -9,7 +9,7 @@ use \PDOException;
 
 if(isset($_POST["treinamentoId"])){    
     header("Content-type: application/json; charset=utf-8");
-    $retornocoltreinos = (new TreinamentosController())->getTreinamentosByColaboradorId($_POST["treinamentoId"]);
+    $retornocoltreinos = (new TreinamentosController())->getColaboradoresByTreinamentoId($_POST["treinamentoId"]);
     $i=0;
     $col_nomes = array();
     foreach($retornocoltreinos as $retorno){
@@ -50,6 +50,15 @@ class TreinamentosController
         $stmt = $teste->query('SELECT * FROM tre_treinamento WHERE tre_ativo = true;');
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getTreinamentosById($treId){
+        $teste = self::BDConnection();
+        $stmt = $teste->prepare('SELECT * FROM tre_treinamento WHERE tre_id = :treId;');
+        $stmt->bindParam(':treId', $treId);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function getColabTreinamentos($colID)
     {
         $stmt =
@@ -121,5 +130,17 @@ class TreinamentosController
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-}
 
+    public function getColaboradoresByTreinamentoId($treId)
+    {
+        $stmt = $this->db->prepare('select p.pes_nome, t.tre_titulo, t.tre_responsavel from treinamentos_do_colaborador
+        inner join tre_treinamento t using (tre_id)
+        inner join col_colaborador c using (col_id)
+        inner join usu_usuarios using (usu_id)
+        inner join pes_pessoas p using (pes_id)
+        where t.tre_id = :treId;');
+        $stmt->bindParam(':treId', $treId);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
