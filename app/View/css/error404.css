@@ -1,0 +1,96 @@
+@font-face {
+    font-family: 'Archivo';
+    src:  url('Archivo/Archivo-VariableFont_wdth\,wght.ttf') format('truetype');
+  }
+  body {
+    font-family: 'Archivo', sans-serif;
+  }
+
+* {
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  
+  body {
+    padding: 0;
+    margin: 0;
+  }
+  
+  #notfound {
+    position: relative;
+    height: 100vh;
+    background-color: #0077ff;
+  }
+  
+  #notfound .notfound {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+  }
+  
+  .notfound {
+    max-width: 460px;
+    width: 100%;
+    text-align: center;
+    line-height: 1.4;
+  }
+  
+  .notfound .notfound-404 {
+    height: 158px;
+    line-height: 153px;
+  }
+  
+  .notfound .notfound-404 h1 {
+    color: #ffffff42;
+    font-size: 220px;
+    letter-spacing: 10px;
+    margin: 0px;
+    font-weight: 700;
+    text-shadow: 2px 2px 0px #c9c9c9, -2px -2px 0px #c9c9c9;
+  }
+  
+  .notfound .notfound-404 h1>span {
+    text-shadow: 2px 2px 0px #0084ff, -2px -2px 0px #00ccff, 0px 0px 8px #002fff;
+  }
+  
+  .notfound p {
+    color: #c9c9c9;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 0px;
+    margin-bottom: 15px;
+  }
+  
+  .notfound a {
+    font-size: 14px;
+    text-decoration: none;
+    text-transform: uppercase;
+    background: transparent;
+    color: #c9c9c963;
+    border: 2px solid #c9c9c9;
+    display: inline-block;
+    padding: 10px 25px;
+    font-weight: 700;
+    -webkit-transition: 0.2s all;
+    transition: 0.2s all;
+  }
+  
+  .notfound a:hover {
+    color: #ffffff;
+    border-color: #3564ff;
+  }
+  
+  @media only screen and (max-width: 480px) {
+    .notfound .notfound-404 {
+      height: 122px;
+      line-height: 122px;
+    }
+  
+    .notfound .notfound-404 h1 {
+        font-size: 122px;
+    }
+  }
+  
