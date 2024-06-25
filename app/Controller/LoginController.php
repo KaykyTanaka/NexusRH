@@ -17,7 +17,7 @@ class LoginController extends LoginModel
     private function BDConnection()
     {
         try {
-            return new PDO('mysql:host=localhost;dbname=NexusRH;charset=utf8', 'root', '');
+            return new PDO('mysql:host=localhost;dbname=NexusRH;charset=utf8', 'root', '1234');
         } catch (PDOException $e) {
             echo "Erro de conexão: " . $e->getMessage();
             exit;
